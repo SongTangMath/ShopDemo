@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" metadata-complete="true" version="3.0">
+  <display-name>Welcome to Tomcat</display-name>
+  <description>
+     Welcome to Tomcat
+  </description>
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>com.zkdx.LoginHandler</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/LoginHandler</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>RegisterServlet</servlet-name>
+    <servlet-class>com.zkdx.RegisterHandler</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegisterServlet</servlet-name>
+    <url-pattern>/RegisterHandler</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>EmployeeLoginServlet</servlet-name>
+    <servlet-class>com.zkdx.EmployeeLoginHandler</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmployeeLoginServlet</servlet-name>
+    <url-pattern>/EmployeeLogin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ManagerLoginServlet</servlet-name>
+    <servlet-class>com.zkdx.ManagerLoginHandler</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManagerLoginServlet</servlet-name>
+    <url-pattern>/ManagerLogin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>EditEmployeeServlet</servlet-name>
+    <servlet-class>com.zkdx.EditEmployeeHandler</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditEmployeeServlet</servlet-name>
+    <url-pattern>/EditEmployeeHandler</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>EditProductServlet</servlet-name>
+    <servlet-class>com.zkdx.ModifyProductHandler</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditProductServlet</servlet-name>
+    <url-pattern>/ModifyProduct</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>QuitServlet</servlet-name>
+    <servlet-class>com.zkdx.QuitHandler</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>QuitServlet</servlet-name>
+    <url-pattern>/Quit</url-pattern>
+  </servlet-mapping>
+</web-app>
