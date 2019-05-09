@@ -298,6 +298,59 @@ public class ProductDAO {
 			return ans;
 			
 		}
+		public int modifyProductIntentoryQuantityByProductId(int id, int number){
+			
+			Product product=getProductById(id);
+			//System.out.println(product);
+			int ans=0;
+			if(product!=null) {
+				try {					
+					DriverManager.getConnection(url, SQLusername, SQLpassword);
+					con=DriverManager.getConnection(url, SQLusername, SQLpassword);
+					
+					 String sql="update productinfo set inventoryQuantity=? where id=?";
+					 
+						 
+						 ps = con.prepareStatement(sql);						 
+						 ps.setInt(2, id);		
+						 int newIntentoryQuantity=number+product.getInventoryQuantity();
+						 if(newIntentoryQuantity<0)newIntentoryQuantity=0;
+						 ps.setInt(1, newIntentoryQuantity);
+				         ans= ps.executeUpdate();
+			         
+			}
+				catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				finally {
+					if(rs!=null)
+						try {
+							rs.close();
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					if(ps!=null)
+						try {
+							ps.close();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					if(con!=null)
+						try {
+							con.close();
+						} catch (SQLException e2) {
+							// TODO Auto-generated catch block
+							e2.printStackTrace();
+						}
+					
+				}}
+			return ans;
+			
+		}
+		
 		public void clearProducts() {
 			try {				
 				DriverManager.getConnection(url, SQLusername, SQLpassword);
@@ -491,9 +544,12 @@ public class ProductDAO {
 				10, 1200);
 		List<Product>list=obj.getAllProducts();
 		
-		for(Product temp:list)System.out.print(temp);*/
+		for(Product temp:list)System.out.print(temp);
 		Product product=obj.getProductByProductName("红米Redmi Note7");
-		System.out.println(product);
+		System.out.println(product);*/
+		obj.insertNewProduct("华为MagicBook 2019", "https://img11.360buyimg.com/cms/jfs/t1/32635/15/9955/193607/5cac060cEa590420b/fe8ad1d5ea5f9f98.png", 
+				12, 4299, "");
+		
 	}
 
 }

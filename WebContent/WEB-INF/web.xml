@@ -52,13 +52,21 @@
     <servlet-name>EditProductServlet</servlet-name>
     <url-pattern>/ModifyProduct</url-pattern>
   </servlet-mapping>
-  
-    <servlet>
+  <servlet>
     <servlet-name>QuitServlet</servlet-name>
     <servlet-class>com.zkdx.QuitHandler</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>QuitServlet</servlet-name>
     <url-pattern>/Quit</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>ModifyProductNumberServlet</servlet-name>
+    <servlet-class>com.zkdx.ModifyProductNumber</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModifyProductNumberServlet</servlet-name>
+    <url-pattern>/ModifyProductNumber</url-pattern>
   </servlet-mapping>
 </web-app>
