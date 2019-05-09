@@ -52,7 +52,10 @@ public class EmployeeLoginHandler extends HttpServlet {
 			request.getRequestDispatcher("ProductsPlanner.jsp").forward(request, response);
 			return;
 		}
-			
+		else if("采购员".equals(employee.getJob())){
+			request.getRequestDispatcher("Purchaser.jsp").forward(request, response);
+			return;
+		}
 		else	request.getRequestDispatcher("employee.jsp").forward(request, response);
 		
 	}
