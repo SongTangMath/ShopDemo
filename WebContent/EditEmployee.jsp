@@ -10,24 +10,22 @@
 </head>
 <body>
 <%
-String idString=(String)request.getParameter("EmployeeId");
-int id=-1;
-try{
-	id=Integer.parseInt(idString);
-}
-catch (Exception e){
+	String idString = (String)request.getParameter("EmployeeId");
+	int id = -1;
+	try{
+		id = Integer.parseInt(idString);
+	}
+	catch (Exception e){
 	e.printStackTrace();
 	return ;
-}
-EmployeeDAO dao=new EmployeeDAO();
-Employee employee=dao.getEmployeeById(id);
-	String username=(String)request.getSession().getAttribute("adminName");
+	}
+	EmployeeDAO dao = new EmployeeDAO();
+	Employee employee = dao.getEmployeeById(id);
+	String username = (String)request.getSession().getAttribute("adminName");
 	
-	if(username==null||!username.equals("admin")||employee==null){
+	if (username==null || !username.equals("admin") || employee == null){
 		response.sendRedirect(request.getContextPath()+"/index.html");  
 	return;}
-	
-	System.out.println(employee.getId());
 	System.out.println(employee);
 	%>
 	<div >

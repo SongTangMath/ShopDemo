@@ -29,8 +29,7 @@ public class RegisterHandler extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		System.out.println("doGet");	
+	
 		String original = request.getParameter("username");
 		String username = new String(original.getBytes("ISO8859-1"),"UTF-8");
 		User user = new UserDAO().getUserByUsername(username);
@@ -55,12 +54,27 @@ public class RegisterHandler extends HttpServlet {
 		String phone = request.getParameter("phone");
 		String address = request.getParameter("address");
 		
-		UserDAO dao=new UserDAO();
-		if (dao.getUserByUsername(username) == null) {
-			dao.insertNewUser(username, password, phone, address);
-			response.getWriter().append("Register Succeeded Served at: ").append(request.getContextPath());
+		boolean isArgsValid = true;
+		if (username == null || "".equals(username)) {
+			isArgsValid = false;
 		}
-		else response.getWriter().append("Register Failed Served at: ").append(request.getContextPath());
+		if (password == null || "".equals(password)) {
+			isArgsValid = false;
+		}
+		if (phone == null || "".equals(phone)) {
+			isArgsValid = false;
+		}
+		if (address == null || "".equals(address)) {
+			isArgsValid = false;
+		}
+		String registerResult="false";
+		UserDAO dao=new UserDAO();
+		if (isArgsValid && dao.getUserByUsername(username) == null) {
+			dao.insertNewUser(username, password, phone, address);
+			registerResult="true";
+		}
+		request.setAttribute("registerResult", registerResult);
+		request.getRequestDispatcher("/RegisterResult.jsp").forward(request, response);
 	}
 
 }

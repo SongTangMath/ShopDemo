@@ -9,10 +9,10 @@
 <title>采购员的页面</title>
 </head>
 <% 
-  Employee employee=(Employee)request.getSession().getAttribute("employee");
+  Employee employee = (Employee)request.getSession().getAttribute("employee");
 	
-	if(employee==null||!"采购员".equals(employee.getJob())){
-		response.sendRedirect(request.getContextPath()+"/index.html");  
+	if (employee == null || !"采购员".equals(employee.getJob())) {
+		response.sendRedirect(request.getContextPath() + "/index.html");  
 	return;
 		}
   String basePath = request.getScheme() + "://"

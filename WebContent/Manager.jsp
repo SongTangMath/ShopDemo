@@ -11,13 +11,13 @@
 <body>
 	<%
 	
-	String username=(String)request.getSession().getAttribute("adminName");
+	String username = (String)request.getSession().getAttribute("adminName");
 	
-	if(username==null||!username.equals("admin")){
-		response.sendRedirect(request.getContextPath()+"/index.html");  
+	if (username == null || !username.equals("admin")) {
+		response.sendRedirect(request.getContextPath() + "/index.html");  
 	return;}
-	EmployeeDAO dao=new EmployeeDAO();
-	List<Employee>list=dao.listAllEmployees(); 
+	EmployeeDAO dao = new EmployeeDAO();
+	List<Employee>list = dao.listAllEmployees(); 
 	String basePath = request.getScheme() + "://"
             + request.getServerName() + ":" + request.getServerPort()
             + request.getContextPath() + "/";
@@ -33,8 +33,8 @@
     <th>操作</th>
   </tr>
   <% 
-  for(int i=0;i<list.size();i++){ 
-	  Employee temp=list.get(i);
+  for (int i = 0;i < list.size();i++){ 
+	  Employee temp = list.get(i);
   
   %>
   <tr>
@@ -90,8 +90,8 @@
 	<br><br><br>
 	<div style="text-align:center">
 	<% Integer status=(Integer)request.getAttribute("status");
-	String toShow="";
-	if(status!=null&&status.equals(1)) toShow="操作成功";
+	String toShow = "";
+	if (status != null && status.equals(1)) toShow="操作成功";
 	else if(status!=null&&status.equals(0)) toShow="操作失败"; %>
 		上一次操作状态:<%=toShow %></div>
 	<div style="text-align:center">

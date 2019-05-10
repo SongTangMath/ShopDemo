@@ -115,16 +115,16 @@ public class EditEmployeeHandler extends HttpServlet {
 				String job = request.getParameter("employeeJob");
 				
 				boolean isArgsValid = true;
-				if(name == null || "".equals(name)) {
+				if (name == null || "".equals(name)) {
 					isArgsValid = false;
 				}
-				if(password == null || "".equals(password)) {
+				if (password == null || "".equals(password)) {
 					isArgsValid = false;
 				}
-				if(departmentName == null || "".equals(departmentName)) {
+				if (departmentName == null || "".equals(departmentName)) {
 					isArgsValid = false;
 				}
-				if(job == null || "".equals(job)) {
+				if (job == null || "".equals(job)) {
 					isArgsValid = false;
 				}
 				int salary = 0; 

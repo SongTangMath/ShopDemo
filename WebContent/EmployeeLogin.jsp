@@ -10,7 +10,7 @@
 <p>员工登陆页面</p>
 <form method="post" action="http://localhost:8080/ShopDemo/EmployeeLogin">
 		<div style="text-align:center" id=usernamediv>
-		用户名:<input type="text" placeholder="请输入您的员工id" name="employeeId" id="employeeId" />
+		员工id:<input type="text" placeholder="请输入您的员工id" name="employeeId" id="employeeId" />
 	</div>
 	<div id="testIfUsed" style="text-align:center">
 	

@@ -11,7 +11,7 @@
 <% 
   Employee employee=(Employee)request.getSession().getAttribute("employee");
 	
-	if(employee==null||!"售货员".equals(employee.getJob())){
+	if (employee == null || !"售货员".equals(employee.getJob())) {
 		response.sendRedirect(request.getContextPath() + "/index.html");  
 	return;
 		}

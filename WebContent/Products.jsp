@@ -16,10 +16,8 @@
      <th>单价</th>
     <th>数量选择</th>
   </tr>
-  <% List<Product>list=new ProductDAO().getAllProducts(); 
-  for(int i=0;i<list.size();i++){ Product temp=list.get(i);
-  System.out.println("processing Product"+i);
-  System.out.println(temp.getPrice());%>
+  <% List<Product>list = new ProductDAO().getAllProducts(); 
+  for (int i = 0;i < list.size();i++){ Product temp=list.get(i);%>
   <tr>
     <td><% out.write(temp.getProductname()); %></td>
     <td><img src=<%out.write(temp.getPictureLink()); %>></td>
@@ -37,17 +35,12 @@
     <div style="float:left" ><%out.write("库存数量"+temp.getInventoryQuantity()); %></div>
     
     </div>   
-
-    
-   
+ 
     </td>
   </tr>
   <% } %>
 </table>
 </body>
 
-<script type="text/javascript">
-
-</script>
 
 </html>

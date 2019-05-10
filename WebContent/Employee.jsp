@@ -11,9 +11,9 @@
 
 <%
 	
-	Employee employee=(Employee)request.getSession().getAttribute("employee");
+	Employee employee = (Employee)request.getSession().getAttribute("employee");
 	
-	if(employee==null){
+	if (employee == null){
 		response.sendRedirect(request.getContextPath()+"/index.html");  
 	return;
 		}

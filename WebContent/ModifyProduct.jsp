@@ -10,14 +10,14 @@
 </head>
 <body>
 <% 
-  Employee employee=(Employee)request.getSession().getAttribute("employee");
-	String ProductID=request.getParameter("ProductID");
-	if(employee==null||ProductID==null||"".equals(ProductID)){
+  Employee employee = (Employee)request.getSession().getAttribute("employee");
+	String ProductID = request.getParameter("ProductID");
+	if (employee == null || ProductID == null || "".equals(ProductID)) {
 		response.sendRedirect(request.getContextPath()+"/index.html");  
 	return;
 	}
-	ProductDAO dao=new ProductDAO();
-	Product product=dao.getProductById(Integer.parseInt(ProductID));
+	ProductDAO dao = new ProductDAO();
+	Product product = dao.getProductById(Integer.parseInt(ProductID));
 	System.out.println(product);
 	 String basePath = request.getScheme() + "://"
 	          + request.getServerName() + ":" + request.getServerPort()
