@@ -28,27 +28,27 @@ public class ModifyProductNumber extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		Employee employee=(Employee)request.getSession().getAttribute("employee");
+		Employee employee = (Employee)request.getSession().getAttribute("employee");
 		
-		if(employee==null){
+		if(employee == null){
 			response.sendRedirect(request.getContextPath()+"/index.html");  
 		return;}
-		HashMap<Integer,String>mapAdd=new HashMap<Integer,String>();
-		HashMap<Integer,String>mapSub=new HashMap<Integer,String>();
-		ProductDAO dao=new ProductDAO();
-		List<Product>list=dao.getAllProducts();
-		boolean isPurchaser=false;
-		for(Product temp:list) {
+		HashMap<Integer,String>mapAdd = new HashMap<Integer,String>();
+		HashMap<Integer,String>mapSub = new HashMap<Integer,String>();
+		ProductDAO dao = new ProductDAO();
+		List<Product>list = dao.getAllProducts();
+		boolean isPurchaser = false;
+		for (Product temp:list) {
 			mapAdd.put(temp.getId(), request.getParameter("addProductID"+temp.getId()));
 			mapSub.put(temp.getId(), request.getParameter("subProductID"+temp.getId()));
 		}
-		for(int key:mapAdd.keySet()) {
-			if(mapAdd.get(key)==null||"".equals(mapAdd.get(key)))continue;
-			isPurchaser=true;
+		for (int key:mapAdd.keySet()) {
+			if (mapAdd.get(key) == null || "".equals(mapAdd.get(key))) continue;
+			isPurchaser = true;
 			System.out.println("ProductID: "+key+" add"+mapAdd.get(key));
 			try {
-				int num=Integer.parseInt(mapAdd.get(key));
-				if(num<0)num=0;
+				int num = Integer.parseInt(mapAdd.get(key));
+				if (num < 0) num = 0;
 				dao.modifyProductIntentoryQuantityByProductId(key, num);
 			}
 			catch(Exception e) {
@@ -57,19 +57,16 @@ public class ModifyProductNumber extends HttpServlet {
 		}
 		
 		for(int key:mapSub.keySet()) {
-			if(mapSub.get(key)==null||"".equals(mapSub.get(key)))continue;
-			System.out.println("ProductID: "+key+" sub"+mapSub.get(key));
+			if (mapSub.get(key) == null || "".equals(mapSub.get(key))) continue;
 			try {
-				int num=Integer.parseInt(mapSub.get(key));
-				if(num<0)num=0;
+				int num = Integer.parseInt(mapSub.get(key));
+				if (num < 0) num = 0;
 				dao.modifyProductIntentoryQuantityByProductId(key, -num);
 			}
 			catch(Exception e) {
 				e.printStackTrace();
 			}
-		}
-			
-		
+		}	
 		if(isPurchaser)
 		response.sendRedirect(request.getContextPath()+"/Purchaser.jsp"); 
 		else response.sendRedirect(request.getContextPath()+"/Seller.jsp"); 

@@ -26,13 +26,12 @@ public class ManagerLoginHandler extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 		request.setCharacterEncoding("UTF-8");
 		String username=request.getParameter("username");
 		String password=request.getParameter("password");
-		System.out.println(username+" "+password);
-		if(!"123".equals(password)) {
+		System.out.println(username + " " + password);
+		if (!"123".equals(password)) {
 			request.getRequestDispatcher("loginFailed.jsp").forward(request, response);  
 		}
 		else {

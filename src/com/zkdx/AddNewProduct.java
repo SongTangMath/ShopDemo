@@ -28,25 +28,25 @@ public class AddNewProduct extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
-		Employee employee=(Employee)request.getSession().getAttribute("employee");
+		Employee employee = (Employee)request.getSession().getAttribute("employee");
 		
-		if(employee==null||!"采购员".equals(employee.getJob())){
+		if(employee == null || !"采购员".equals(employee.getJob())){
 			response.sendRedirect(request.getContextPath()+"/index.html");  
 		return;}
 		
-		String productName=request.getParameter("productname");
+		String productName = request.getParameter("productname");
 		int productPrice = 0;
 		try {
-		 productPrice=Integer.parseInt(request.getParameter("productprice"));
+		 productPrice = Integer.parseInt(request.getParameter("productprice"));
 		}
 		catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
 		if(productPrice < 0)
 			productPrice = 0;
-		ProductDAO dao=new ProductDAO();
-		Product product=dao.getProductByProductName(productName);
-		if(product==null) {
+		ProductDAO dao = new ProductDAO();
+		Product product = dao.getProductByProductName(productName);
+		if(product == null) {
 			dao.insertNewProduct(productName, "", 0, productPrice, "");
 		}
 		response.sendRedirect(request.getContextPath()+"/Purchaser.jsp"); 

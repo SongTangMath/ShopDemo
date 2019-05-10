@@ -28,19 +28,17 @@ public class LoginHandler extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
-		String username=request.getParameter("username");
-		String password=request.getParameter("password");
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
 		System.out.print(username);
-		UserDAO obj=new UserDAO();
-		User user=obj.getUserByUsername(username);
-		if(user==null||!user.getPassword().equals(password))
-			response.getWriter().append("Login Failed ");
-		else {
-			//response.getWriter().append("Login Succeeded ");
-		
+		UserDAO obj = new UserDAO();
+		User user = obj.getUserByUsername(username);
+		if (user == null || !user.getPassword().equals(password))
+			response.sendRedirect("/ShopDemo/index.html");
+		else {			
 			response.sendRedirect("/ShopDemo/Products.jsp");
 		}
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 	}
 
 	/**

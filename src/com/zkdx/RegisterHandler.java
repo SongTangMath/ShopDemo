@@ -22,25 +22,25 @@ public class RegisterHandler extends HttpServlet {
      */
     public RegisterHandler() {
         super();
-        // TODO Auto-generated constructor stub
+       
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		System.out.println("doGet");	
-		String original=request.getParameter("username");
-		String username= new String(original.getBytes("ISO8859-1"),"UTF-8");
 		
-		System.out.println(original);
-		System.out.println(username);
-		User user=new UserDAO().getUserByUsername(username);
+		System.out.println("doGet");	
+		String original = request.getParameter("username");
+		String username = new String(original.getBytes("ISO8859-1"),"UTF-8");
+		User user = new UserDAO().getUserByUsername(username);
 		System.out.println(user);
-		if(user!=null)response.getWriter().append("true");
-		else response.getWriter().append("false");
+		if (user != null) {
+			response.getWriter().append("true");
+		}
+		else {
+			response.getWriter().append("false");
+		}
 	}
 
 	/**
@@ -50,13 +50,13 @@ public class RegisterHandler extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		request.setCharacterEncoding("UTF-8");
-		String username=request.getParameter("username");
-		String password=request.getParameter("password");
-		String phone=request.getParameter("phone");
-		String address=request.getParameter("address");
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		String phone = request.getParameter("phone");
+		String address = request.getParameter("address");
 		
 		UserDAO dao=new UserDAO();
-		if(dao.getUserByUsername(username)==null) {
+		if (dao.getUserByUsername(username) == null) {
 			dao.insertNewUser(username, password, phone, address);
 			response.getWriter().append("Register Succeeded Served at: ").append(request.getContextPath());
 		}

@@ -29,7 +29,7 @@ public class QuitHandler extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.getSession().removeAttribute("adminName");
 		request.getSession().removeAttribute("employee");
-		String contextPath=request.getContextPath();
+		String contextPath = request.getContextPath();
 		response.sendRedirect(contextPath+"/index.html");
 	}
 

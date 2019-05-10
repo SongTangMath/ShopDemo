@@ -30,38 +30,39 @@ public class EmployeeLoginHandler extends HttpServlet {
 		
 		
 		request.setCharacterEncoding("UTF-8");
-		String employeeIdString=request.getParameter("employeeId");
-		String password=request.getParameter("password");
-		EmployeeDAO dao=new EmployeeDAO();
-		int employeeId=-1;
+		String employeeIdString = request.getParameter("employeeId");
+		String password = request.getParameter("password");
+		EmployeeDAO dao = new EmployeeDAO();
+		int employeeId = -1;
 		try {
-			employeeId=Integer.parseInt(employeeIdString);
+			employeeId = Integer.parseInt(employeeIdString);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		Employee employee=dao.getEmployeeById(employeeId);
-		System.out.println(employee);
-		if(employee==null||!password.equals(employee.getPassword()))
+		Employee employee = dao.getEmployeeById(employeeId);
+		if (employee == null || !password.equals(employee.getPassword()))
 			{
 				request.getRequestDispatcher("index.html").forward(request, response);
 				return;
 			}
 		request.getSession().setAttribute("employee", employee);
-		if("商品策划".equals(employee.getJob())){
+		if ("商品策划".equals(employee.getJob())){
 			request.getRequestDispatcher("ProductsPlanner.jsp").forward(request, response);
 			return;
 		}
-		else if("采购员".equals(employee.getJob())){
+		else if ("采购员".equals(employee.getJob())){
 			request.getRequestDispatcher("Purchaser.jsp").forward(request, response);
 			return;
 		}
 		
-		else if("售货员".equals(employee.getJob())){
+		else if ("售货员".equals(employee.getJob())){
 			request.getRequestDispatcher("Seller.jsp").forward(request, response);
 			return;
 		}
-		else	request.getRequestDispatcher("employee.jsp").forward(request, response);
+		else {
+			request.getRequestDispatcher("Employee.jsp").forward(request, response);
+		}
 		
 	}
 

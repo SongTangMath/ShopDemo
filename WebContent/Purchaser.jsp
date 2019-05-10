@@ -55,7 +55,7 @@
 </form>
 
 <div style="text-align:center">下面是新增商品的表单</div>
-<form method="POST" action="<%out.write(basePath+"addNewProduct"); %>" >
+<form method="POST" action="<%out.write(basePath + "addNewProduct"); %>" >
 <div style="text-align:center">
 商品名称<input type="text" name="productname"/>
 商品单价<input type="number" name="productprice"/>
@@ -65,5 +65,7 @@
 
 
 </form>
+
+<a href="<%=basePath+"Quit" %>">退出登录并返回首页</a>
 </body>
 </html>

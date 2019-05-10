@@ -54,8 +54,7 @@
 	
 	<br><br><br>
 	<div style="text-align:center"> <p>添加新员工</p></div>
-	
-	<div >
+
 	<form method="post" action="http://localhost:8080/ShopDemo/EditEmployeeHandler">
 	<div style="text-align:center" id=usernamediv>
 		员工id:<input type="text" name="EmployeeId" id="EmployeeId" />
@@ -87,13 +86,14 @@
 	<div style="text-align:center">
 		<input type="submit" value="Register"/>
 	</div>
+	</form>
 	<br><br><br>
 	<div style="text-align:center">
 	<% Integer status=(Integer)request.getAttribute("status");
 	String toShow="";
 	if(status!=null&&status.equals(1)) toShow="操作成功";
 	else if(status!=null&&status.equals(0)) toShow="操作失败"; %>
-		上一次操作状态:<div> <%=toShow %></div>
+		上一次操作状态:<%=toShow %></div>
 	<div style="text-align:center">
 	<a href="<%=basePath+"Quit" %>">退出登录并返回首页</a>
 	</div>

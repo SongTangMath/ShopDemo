@@ -32,11 +32,11 @@ public class ModifyProductHandler extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.setCharacterEncoding("utf-8");
-		FileItemFactory fileItemFactory=new DiskFileItemFactory();
-		ServletFileUpload sfu=new ServletFileUpload(fileItemFactory);
+		FileItemFactory fileItemFactory = new DiskFileItemFactory();
+		ServletFileUpload sfu = new ServletFileUpload(fileItemFactory);
 		sfu.setHeaderEncoding("utf-8");
-		List<FileItem>items=new ArrayList<FileItem>();
-		String productname=null;
+		List<FileItem>items = new ArrayList<FileItem>();
+		String productname = null;
 		try {
 			items=sfu.parseRequest(request);
 			System.out.println("items.size="+items.size());
@@ -51,71 +51,60 @@ public class ModifyProductHandler extends HttpServlet {
 		
 		
 		ProductDAO dao=new ProductDAO();
-		for(FileItem item:items)
-			if(item.isFormField()) {
-				String itemFieldName=item.getFieldName();
-				String value=null;
-				value=item.getString("utf-8");
-				//System.out.println("fieldName:" + itemFieldName + "--value:" + value);
-				//System.out.println(itemFieldName);
-				if("productname".equals(itemFieldName))productname=value;				
+		for (FileItem item:items)
+			if (item.isFormField()) {
+				String itemFieldName = item.getFieldName();
+				String value = null;
+				value = item.getString("utf-8");				
+				if ("productname".equals(itemFieldName))productname=value;				
 				
 			}
 		
-		for(FileItem item:items)
-			if(item.isFormField()) {
+		for (FileItem item:items)
+			if (item.isFormField()) {
 				String itemFieldName=item.getFieldName();
 				String value=null;
 				value=item.getString("utf-8");
-				//System.out.println("fieldName:" + itemFieldName + "--value:" + value);
-				//System.out.println(itemFieldName);
-				 if("url".equals(itemFieldName)) {
-					//System.out.println(value);
-					if(!"".contentEquals(value)) {
-										
-					dao.modifyProductPictureLinkByProductName(productname,value);
-					
+
+				 if ("url".equals(itemFieldName)) {
+					if (!"".contentEquals(value)) {										
+					dao.modifyProductPictureLinkByProductName(productname,value);					
 				}
 				}
 				 else if("productplan".equals(item.getFieldName())) {
-					 System.out.println(productname+"  "+ item.getString("utf-8"));
+					 System.out.println(productname + "  " + item.getString("utf-8"));
 					 dao.modifyProductPlanByProductName(productname, item.getString("utf-8"));
 				 }
 			}
-		for(FileItem item:items)
-			if(!item.isFormField()) {
+		for (FileItem item:items)
+			if (!item.isFormField()) {
 				String fileName=item.getName();
 				System.out.println("fileSize:"+item.getSize());
-				if(item.getSize()==0)continue;
-				String filePathPart1= getServletContext().getRealPath("/UploadedPictures");
-				long time=System.currentTimeMillis();
-				String filePathPart2= time+fileName;
-				String newProductLink=basePath+"UploadedPictures/"+filePathPart2;
+				if (item.getSize() == 0)continue;
+				String filePathPart1 = getServletContext().getRealPath("/UploadedPictures");
+				long time = System.currentTimeMillis();
+				String filePathPart2 = time + fileName;
+				String newProductLink = basePath + "UploadedPictures/" + filePathPart2;
 				System.out.println(newProductLink);
+
+				File file = new File(filePathPart1);
+				if (!file.exists()) {
+					file.mkdirs();
+				}
 				
-				//System.out.println("fileName:" + fileName );
-				//System.out.println(request.getContextPath());
-				
-				File file=new File(filePathPart1);
-				if(!file.exists())file.mkdirs();
-				//System.out.println(file.getAbsolutePath());
-				
-				file=new File(file,filePathPart2);
+				file = new File(file, filePathPart2);
 				
 				System.out.println(file.getAbsolutePath());
 				try {
-					System.out.println(productname);
-					
+					System.out.println(productname);					
 					item.write(file);
-					dao.modifyProductPictureLinkByProductName(productname,newProductLink);
-					
+					dao.modifyProductPictureLinkByProductName(productname, newProductLink);					
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
-				
+				}				
 			}
-		response.sendRedirect(request.getContextPath()+"/ProductsPlanner.jsp"); 
+		response.sendRedirect(request.getContextPath() + "/ProductsPlanner.jsp"); 
 	}
 
 	/**

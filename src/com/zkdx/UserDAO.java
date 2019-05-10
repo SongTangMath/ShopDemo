@@ -2,16 +2,15 @@ package com.zkdx;
 import java.sql.*;
 public class UserDAO {
 	//String url1="jdbc:mysql://localhost:3306/test";
-	String url="jdbc:mysql://localhost:3306/shopdemo?"
+	String url = "jdbc:mysql://localhost:3306/shopdemo?"
 			+ "useUnicode=true&characterEncoding=utf8&"
 			+ "serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true";
 
-	String SQLusername="root";
-	String SQLpassword="249658364";
-	Connection con=null;
-	Statement stmt=null;
+	String SQLusername = "root";
+	String SQLpassword = "249658364";
+	Connection con = null;
 	PreparedStatement ps =null;
-	ResultSet rs=null;
+	ResultSet rs = null;
 	
 	static {   
 		try {
@@ -20,26 +19,51 @@ public class UserDAO {
 			throw new ExceptionInInitializerError(e);
 		}
 	}
-
+	public void getConnection() throws SQLException {					
+		DriverManager.getConnection(url, SQLusername, SQLpassword);
+		con=DriverManager.getConnection(url, SQLusername, SQLpassword);				
+}
+public void closeAll() {
+	if( rs != null)
+		try {
+			rs.close();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+	if(ps != null)
+		try {
+			ps.close();
+		} catch (SQLException e1) {
+			
+			e1.printStackTrace();
+		}
+	if(con != null)
+		try {
+			con.close();
+		} catch (SQLException e2) {
+			
+			e2.printStackTrace();
+		}
+	
+}
 
 	public User getUserById(int id) {
-		User user=null;
+		User user = null;
 		try {
-			
-			DriverManager.getConnection(url, SQLusername, SQLpassword);
-			con=DriverManager.getConnection(url, SQLusername, SQLpassword);
-			//System.out.print(con);
-			 stmt = con.createStatement();
-	         rs= stmt.executeQuery("SELECT* from users where users.id="+id);
+		this.getConnection();
+		String sql = "SELECT* from users where users.id=?";
+			ps = con.prepareStatement(sql);
+	         rs= ps.executeQuery();
 	        
 	        while(rs.next()){
-	        	int userid=rs.getInt("id");
-	        	String username=rs.getString("username");
-	        	String userPassword=rs.getString("password"); 
-	        	String userPhone=rs.getString("phone");
-	        	String userAddress=rs.getString("address"); 
+	        	int userid = rs.getInt("id");
+	        	String username = rs.getString("username");
+	        	String userPassword = rs.getString("password"); 
+	        	String userPhone = rs.getString("phone");
+	        	String userAddress = rs.getString("address"); 
 	            
-	            user= new User(userid,username,userPassword,userPhone,userAddress);
+	            user = new User(userid,username,userPassword,userPhone,userAddress);
 	            System.out.println(user);
 	        }
 	        
@@ -49,53 +73,30 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 		finally {
-			if(rs!=null)
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			if(stmt!=null)
-				try {
-					stmt.close();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			if(con!=null)
-				try {
-					con.close();
-				} catch (SQLException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
-			
+			this.closeAll();			
 		}
 		return user;
 		
 	}
 	
 	public User getUserByUsername(String name) {
-		if(name==null)return null;
-		User user=null;
+		if (name == null) return null;
+		User user = null;
 		try {	
-			
-				
-				DriverManager.getConnection(url, SQLusername, SQLpassword);
-				con=DriverManager.getConnection(url, SQLusername, SQLpassword);
-			
-			 stmt = con.createStatement();
-	         rs= stmt.executeQuery("SELECT* from users where users.username='"+name+"'");
+			 this.getConnection();
+			 String sql = "SELECT* from users where users.username=?";
+			 ps = con.prepareStatement(sql);
+			 ps.setString(1, name);
+	         rs= ps.executeQuery();
 	        
-	        while(rs.next()){
-	        	int userid=rs.getInt("id");
-	        	String username=rs.getString("username");
-	        	String userPassword=rs.getString("password"); 
-	        	String userPhone=rs.getString("phone");
-	        	String userAddress=rs.getString("address"); 
+	        while (rs.next()){
+	        	int userid = rs.getInt("id");
+	        	String username = rs.getString("username");
+	        	String userPassword = rs.getString("password"); 
+	        	String userPhone = rs.getString("phone");
+	        	String userAddress = rs.getString("address"); 
 	            
-	            user= new User(userid,username,userPassword,userPhone,userAddress);
+	            user = new User(userid,username,userPassword,userPhone,userAddress);
 	            System.out.println(user);
 	        }
 	        
@@ -105,27 +106,7 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 		finally {
-			if(rs!=null)
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			if(stmt!=null)
-				try {
-					stmt.close();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			if(con!=null)
-				try {
-					con.close();
-				} catch (SQLException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
+			this.closeAll();
 			
 		}
 		return user;
@@ -139,13 +120,10 @@ public class UserDAO {
 		int ans=0;
 		if(user!=null) {
 			try {
-				
-				DriverManager.getConnection(url, SQLusername, SQLpassword);
-				con=DriverManager.getConnection(url, SQLusername, SQLpassword);
+				this.getConnection();
 				 
-		         String sql="update  users set password=?,phone=?,address=?where users.username=?";					 ;
-					 ps = con.prepareStatement(sql);
-					 
+		         String sql = "update  users set password=?,phone=?,address=?where users.username=?";					 ;
+					 ps = con.prepareStatement(sql);					 
 					 ps.setString(1, password);
 					 ps.setString(2, phone);
 					 ps.setString(3, address);
@@ -157,27 +135,7 @@ public class UserDAO {
 				e.printStackTrace();
 			}
 			finally {
-				if(rs!=null)
-					try {
-						rs.close();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				if(ps!=null)
-					try {
-						ps.close();
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				if(con!=null)
-					try {
-						con.close();
-					} catch (SQLException e2) {
-						// TODO Auto-generated catch block
-						e2.printStackTrace();
-					}
+				this.closeAll();
 				
 			}}
 		return ans;
@@ -185,39 +143,18 @@ public class UserDAO {
 	}
 	public void clearUsers() {
 		try {
+			this.getConnection();
 			
-			DriverManager.getConnection(url, SQLusername, SQLpassword);
-			con=DriverManager.getConnection(url, SQLusername, SQLpassword);
-			 stmt = con.createStatement();
 			 String sql="delete from users";
-			 stmt.execute(sql);
+			 ps = con.prepareStatement(sql);
+			 ps.executeUpdate();
 	}
 		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		finally {
-			if(rs!=null)
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			if(stmt!=null)
-				try {
-					stmt.close();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			if(con!=null)
-				try {
-					con.close();
-				} catch (SQLException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
+			this.closeAll();
 			
 		}
 	}
@@ -228,89 +165,42 @@ public class UserDAO {
 		
 		if(user!=null)return 0; 
 		try {
-		
-			DriverManager.getConnection(url, SQLusername, SQLpassword);
-			con=DriverManager.getConnection(url, SQLusername, SQLpassword);
-			 stmt = con.createStatement();
-			 
-			
-			  
-			 String sql="insert into users (username,password,phone,address)" + 
+		this.getConnection();			 
+		 String sql="insert into users (username,password,phone,address)" + 
 			 		"values(?,?,?,?)";
-			 ;
+
 			 ps = con.prepareStatement(sql);
 			 ps.setString(1, username);
 			 ps.setString(2, password);
 			 ps.setString(3, phone);
 			 ps.setString(4, address);
-	         ans= ps.executeUpdate();
+	         ans = ps.executeUpdate();
 	}
 		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		finally {
-			if(rs!=null)
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			if(ps!=null)
-				try {
-					ps.close();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			if(con!=null)
-				try {
-					con.close();
-				} catch (SQLException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
-			
+			this.closeAll();			
 		}
 	return ans;
 	}
 	public void deleteUserByUserName(String name) {
 		if(name==null)return ;
 		try {
-			
-			DriverManager.getConnection(url, SQLusername, SQLpassword);
-			con=DriverManager.getConnection(url, SQLusername, SQLpassword);
-			 stmt = con.createStatement();
-			 String sql="delete from users where users.username='"+name+"'";
-			 stmt.execute(sql);
+			this.getConnection();
+			 String sql = "delete from users where users.username=?";
+			 ps = con.prepareStatement(sql);
+			 ps.setString(1, name);
+			 
+			 ps.executeUpdate();
 	}
 		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		finally {
-			if(rs!=null)
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			if(stmt!=null)
-				try {
-					stmt.close();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			if(con!=null)
-				try {
-					con.close();
-				} catch (SQLException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
+			this.closeAll();
 			
 		}
 	}
@@ -318,8 +208,6 @@ public class UserDAO {
 		// TODO Auto-generated method stub
 	
 		UserDAO obj=new UserDAO();
-		//obj.getUserById(1);
-		//obj.getUserByUsername("lisi");
 		obj.clearUsers();
 		obj.insertNewUser("lisi", "768", "18902038771", "Palmont City");
 		obj.insertNewUser("张三", "256", "18902038772", "Lincoln Park");

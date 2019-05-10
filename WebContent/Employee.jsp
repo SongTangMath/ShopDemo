@@ -17,12 +17,14 @@
 		response.sendRedirect(request.getContextPath()+"/index.html");  
 	return;
 		}
-	String departmentId=employee.getDepartmentName();
+	String basePath = request.getScheme() + "://"
+	          + request.getServerName() + ":" + request.getServerPort()
+	          + request.getContextPath() + "/";
 	%>
 <body>
 	<div style="text-align:center">欢迎你,<%=employee %></div>
 	
-
+<a href="<%=basePath+"Quit" %>">退出登录并返回首页</a>
 	
 </body>
 </html>

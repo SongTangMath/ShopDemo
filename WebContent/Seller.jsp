@@ -12,7 +12,7 @@
   Employee employee=(Employee)request.getSession().getAttribute("employee");
 	
 	if(employee==null||!"售货员".equals(employee.getJob())){
-		response.sendRedirect(request.getContextPath()+"/index.html");  
+		response.sendRedirect(request.getContextPath() + "/index.html");  
 	return;
 		}
   String basePath = request.getScheme() + "://"
@@ -53,5 +53,7 @@
 
 <input type="submit" value="submit">
 </form>
+
+<a href="<%=basePath+"Quit" %>">退出登录并返回首页</a>
 </body>
 </html>
