@@ -1,26 +1,26 @@
-1��admin
-1��productManager
-�����û�
+1个admin
+1个productManager
+许多用户
 
-��Ʒ��
-id,��Ʒ����,����,���,ͼƬ����
-�û���
+商品表
+id,商品名称,单价,库存,图片链接
+用户表
 id,username,password,phone,address
 
-��½,ע��ҳ��
-adminҳ��
-productManagerҳ��
-�û�ҳ���г�������Ʒ
+登陆,注册页面
+admin页面
+productManager页面
+用户页面列出所有商品
 
-����һ����,����Ʒ����,��ƷͼƬ,����ѡ��,��ʾ���ۺ��ܼ�
-������һ�����ӽ����ҵĹ��ﳵ
+做成一个表,有商品名称,商品图片,数量选择,显示单价和总价
+下面有一个链接叫做我的购物车
 
-���ﳵҳ����ʾ�û����������Ʒ
-���㰴ť:ΨһЧ���Ǹ��¿��
+购物车页面显示用户买的所有商品
+结算按钮:唯一效果是更新库存
 
-���еط�ͳһ����utf-8
-ע��get���������ISO-8859-1���յ�ʱ����Ҫ���⴦��
-Ϊ��ʹ��MySQL����utf8��Ҫ�޸�my.ini�е�����
+所有地方统一编码utf-8
+注意get请求参数是ISO-8859-1接收的时候需要额外处理
+为了使得MySQL编码utf8需要修改my.ini中的配置
 cd C:\Program Files\MySQL\MySQL Server 5.7\bin
 cd C:\Program Files\MySQL\MySQL Server 8.0\bin
 mysql -uroot -p249658364

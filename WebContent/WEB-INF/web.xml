@@ -60,13 +60,21 @@
     <servlet-name>QuitServlet</servlet-name>
     <url-pattern>/Quit</url-pattern>
   </servlet-mapping>
-  
-   <servlet>
+  <servlet>
     <servlet-name>ModifyProductNumberServlet</servlet-name>
     <servlet-class>com.zkdx.ModifyProductNumber</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ModifyProductNumberServlet</servlet-name>
     <url-pattern>/ModifyProductNumber</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>AddNewProductServlet</servlet-name>
+    <servlet-class>com.zkdx.AddNewProduct</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddNewProductServlet</servlet-name>
+    <url-pattern>/addNewProduct</url-pattern>
   </servlet-mapping>
 </web-app>

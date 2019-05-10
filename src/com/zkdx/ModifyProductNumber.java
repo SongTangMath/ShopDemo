@@ -27,6 +27,12 @@ public class ModifyProductNumber extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		Employee employee=(Employee)request.getSession().getAttribute("employee");
+		
+		if(employee==null){
+			response.sendRedirect(request.getContextPath()+"/index.html");  
+		return;}
 		HashMap<Integer,String>mapAdd=new HashMap<Integer,String>();
 		HashMap<Integer,String>mapSub=new HashMap<Integer,String>();
 		ProductDAO dao=new ProductDAO();
