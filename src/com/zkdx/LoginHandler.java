@@ -34,8 +34,9 @@ public class LoginHandler extends HttpServlet {
 		UserDAO obj = new UserDAO();
 		User user = obj.getUserByUsername(username);
 		if (user == null || !user.getPassword().equals(password))
-			response.sendRedirect("/ShopDemo/index.html");
-		else {			
+			response.sendRedirect("/ShopDemo/loginFailed.jsp");
+		else {	
+		    request.getSession().setAttribute("user", user);
 			response.sendRedirect("/ShopDemo/Products.jsp");
 		}
 		

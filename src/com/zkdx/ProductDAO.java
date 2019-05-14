@@ -75,7 +75,7 @@ public class ProductDAO {
 		        	String productPlan = rs.getString("productplan");
 		             product = new Product(productname,pictureLink,productid,
 		            		inventoryQuantity,price,productPlan	);
-		            System.out.print(product);
+		            
 		            
 		        }
 		        

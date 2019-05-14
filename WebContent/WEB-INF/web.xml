@@ -68,13 +68,21 @@
     <servlet-name>ModifyProductNumberServlet</servlet-name>
     <url-pattern>/ModifyProductNumber</url-pattern>
   </servlet-mapping>
-  
-    <servlet>
+  <servlet>
     <servlet-name>AddNewProductServlet</servlet-name>
     <servlet-class>com.zkdx.AddNewProduct</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AddNewProductServlet</servlet-name>
     <url-pattern>/addNewProduct</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>UserBuyHandler</servlet-name>
+    <servlet-class>com.zkdx.UserBuyHandler</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserBuyHandler</servlet-name>
+    <url-pattern>/UserBuyHandler</url-pattern>
   </servlet-mapping>
 </web-app>
