@@ -55,7 +55,7 @@
 
 <div style="text-align:center">历史订单信息</div>
 <% OrderInfoDAO dao=new OrderInfoDAO();
-HashMap<java.sql.Date,LinkedList<OrderInfo>> map =dao.mapOrdersByUsername(user.getUsername());
+TreeMap<java.sql.Date,LinkedList<OrderInfo>> map =dao.mapOrdersByUsername(user.getUsername());
 DateFormat ddtf = DateFormat.getDateTimeInstance();  
 //System.out.println(ddtf.format(date));
 %>
@@ -68,11 +68,11 @@ DateFormat ddtf = DateFormat.getDateTimeInstance();
    
   </tr>
   <% 
-  //Collections.sort(listOrder,(a,b)->a.getDate().compareTo(b.getDate()));
   
   for(java.sql.Date date:map.keySet()){
       LinkedList<OrderInfo> listOrderInfo=map.get(date);
       int sum=0,n=listOrderInfo.size();
+      
      %>
     
  

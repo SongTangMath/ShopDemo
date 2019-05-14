@@ -84,9 +84,10 @@ public class OrderInfoDAO {
              return list;
          }
          
- public HashMap<java.sql.Date,LinkedList<OrderInfo>> mapOrdersByUsername(String name) {
+ public TreeMap<java.sql.Date,LinkedList<OrderInfo>> mapOrdersByUsername(String name) {
              
-     HashMap<java.sql.Date,LinkedList<OrderInfo>>map = new  HashMap<java.sql.Date,LinkedList<OrderInfo>>();
+     TreeMap<java.sql.Date,LinkedList<OrderInfo>>map = 
+         new  TreeMap<java.sql.Date,LinkedList<OrderInfo>>((a,b)->b.compareTo(a));
              String sql = "select *from orderinfo where username=?";
              try {
                  getConnection();
@@ -149,8 +150,6 @@ public class OrderInfoDAO {
              return ans;
          }
          public static void main(String[]args) {
-             HashMap<java.sql.Date,LinkedList<OrderInfo>> map
-             = new OrderInfoDAO().mapOrdersByUsername("Tom");
-             System.out.println(map.keySet().size());
+           
          }
 }

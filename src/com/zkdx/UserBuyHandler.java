@@ -55,14 +55,13 @@ public class UserBuyHandler extends HttpServlet {
            int num=0;
            
             try {
-                 num = Integer.parseInt(key);
-                 System.out.println("ProductID: "+key+" numberOfBuy"+num);
-                if (num <= 0) continue;
+                 num = Integer.parseInt(key);                              
                 if(num>temp.getInventoryQuantity())num=temp.getInventoryQuantity();
+                if (num <= 0) continue;
                 OrderInfo info =
                     new OrderInfo(user.getUsername(), user.getUsername()+timeLong, date,
                         temp.getProductname(), num,temp.getPrice());
-                //System.out.println(info);
+                System.out.println(info);
                 orderInfoDao.insertNewOrderInfo(info);
                 dao.modifyProductIntentoryQuantityByProductId(temp.getId(), -num);
             }
