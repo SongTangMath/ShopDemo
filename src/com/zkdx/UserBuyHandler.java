@@ -67,7 +67,7 @@ public class UserBuyHandler extends HttpServlet {
                     continue;
                 }
                 OrderInfo info = new OrderInfo(user.getUsername(), user.getUsername() + timeLong, date,
-                    temp.getProductname(), num, temp.getPrice(),temp.getBuyingPrice(),temp.getProductCategory());
+                    temp.getProductname(), num, temp.getPrice(), temp.getBuyingPrice(), temp.getProductCategory());
                 System.out.println(info);
                 orderInfoDao.insertNewOrderInfo(info);
                 dao.modifyProductIntentoryQuantityByProductId(temp.getId(), -num);

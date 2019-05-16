@@ -63,7 +63,7 @@ public class AddNewProduct extends HttpServlet {
         ProductDAO dao = new ProductDAO();
         Product product = dao.getProductByProductName(productName);
         if (product == null) {
-            dao.insertNewProduct(productName, "", 0, productPrice, "",buyingPrice,productCategory);
+            dao.insertNewProduct(productName, "", 0, productPrice, "", buyingPrice, productCategory);
         }
         response.sendRedirect(request.getContextPath() + "/Purchaser.jsp");
     }

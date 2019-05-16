@@ -397,6 +397,40 @@ public class ProductDAO {
 
     }
 
+    public List<Product> listProductsByProductCategory(String pattern) {
+        List<Product> list = new ArrayList<Product>();
+        try {
+            this.getConnection();
+            String sql = "SELECT* from productinfo where productname like ? or productcategory like ?";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, "%" + pattern + "%");
+            ps.setString(2, "%" + pattern + "%");
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String productname = rs.getString("productname");
+                String pictureLink = rs.getString("pictureLink");
+                int productid = rs.getInt("id");
+                int inventoryQuantity = rs.getInt("inventoryQuantity");
+                int price = rs.getInt("price");
+                String productPlan = rs.getString("productplan");
+                int buyingPrice = rs.getInt("buyingprice");
+                String productCategory = rs.getString("productcategory");
+                Product temp = new Product(productname, pictureLink, productid, inventoryQuantity, price, productPlan,
+                    buyingPrice, productCategory);
+                list.add(temp);
+            }
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
+            this.closeAll();
+        }
+        return list;
+
+    }
+
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         ProductDAO obj = new ProductDAO();

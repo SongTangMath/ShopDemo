@@ -35,15 +35,19 @@ public class SellingStatus {
     public void setTotalProfit(int totalProfit) {
         this.totalProfit = totalProfit;
     }
+
     public void addQuantitySold(int quantitySold) {
-        this.quantitySold+=quantitySold;
+        this.quantitySold += quantitySold;
     }
+
     public void addTotalCost(int totalCost) {
-        this.totalCost+=totalCost;        
+        this.totalCost += totalCost;
     }
+
     public void addTotalProfit(int totalProfit) {
-        this.totalProfit+=totalProfit;        
+        this.totalProfit += totalProfit;
     }
+
     public SellingStatus(String productName, int quantitySold, int totalCost, int totalProfit) {
         super();
         this.productName = productName;
