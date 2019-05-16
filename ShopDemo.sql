@@ -36,4 +36,16 @@ productnumber int(10)not null,
 price int(10) not null
 )	charset utf8mb4;
 
-	
+alter table productinfo add(buyingprice int(10) default 0,
+productcategory varchar(60));
+
+alter table orderinfo add(buyingprice int(10) default 0,
+productcategory varchar(60));
+
+insert into orderinfo(username,orderid,orderdatetime,productname,productnumber,price,buyingprice,productcategory)values(
+'Tom',1, '2009-01-02 12:00:00','华为MagicBook 2019',2,4299,4000,'笔记本电脑');
+
+insert into orderinfo(username,orderid,orderdatetime,productname,productnumber,price,buyingprice,productcategory)values(
+'Jerry',2, '2013-01-02 12:00:00','红米Redmi Note7',3,1200,1000,'手机');
+
+select *from orderinfo where orderdatetime between '2008-01-01' and '2012-02-02';

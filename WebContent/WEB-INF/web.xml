@@ -76,8 +76,7 @@
     <servlet-name>AddNewProductServlet</servlet-name>
     <url-pattern>/addNewProduct</url-pattern>
   </servlet-mapping>
-  
-   <servlet>
+  <servlet>
     <servlet-name>UserBuyHandler</servlet-name>
     <servlet-class>com.zkdx.UserBuyHandler</servlet-class>
   </servlet>
@@ -85,4 +84,13 @@
     <servlet-name>UserBuyHandler</servlet-name>
     <url-pattern>/UserBuyHandler</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>QuerySellingStatus</servlet-name>
+    <servlet-class>com.zkdx.QuerySellingStatus</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>QuerySellingStatus</servlet-name>
+    <url-pattern>/QuerySellingStatus</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

@@ -58,8 +58,9 @@
 <form method="POST" action="<%out.write(basePath + "addNewProduct"); %>" >
 <div style="text-align:center">
 商品名称<input type="text" name="productname"/>
-商品单价<input type="number" name="productprice"/>
-
+商品售价<input type="number" name="productprice"/>
+商品进价<input type="number" name="buyingprice"/>
+商品类别<input type="text" name="productcategory"/>
 <input type="submit" value="submit">
 </div>
 

@@ -97,6 +97,14 @@
 	<div style="text-align:center">
 	<a href="<%=basePath+"Quit" %>">退出登录并返回首页</a>
 	</div>
+	<div style="text-align:center">根据时间段查询销售情况
+	<form action="<%=basePath+"QuerySellingStatus" %>">
+	查询起始时间(yyyy-mm-dd)<input type="date" name="begindate"/>
+	<br>
+	查询结束时间(yyyy-mm-dd)<input type="date" name="enddate"/>
+	<input type="submit" value="获取结果excel表"/>
+	</form>
 	
+	</div>
 </body>
 </html>
