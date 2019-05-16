@@ -3,7 +3,7 @@ package com.zkdx;
 import java.sql.*;
 
 public class UserDAO {
-    // String url1="jdbc:mysql://localhost:3306/test";
+    
     String url = "jdbc:mysql://localhost:3306/shopdemo?" + "useUnicode=true&characterEncoding=utf8&"
         + "serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true";
 
@@ -27,27 +27,30 @@ public class UserDAO {
     }
 
     public void closeAll() {
-        if (rs != null)
+        if (rs != null) {
             try {
                 rs.close();
             } catch (SQLException e) {
 
                 e.printStackTrace();
             }
-        if (ps != null)
+        }
+        if (ps != null) {
             try {
                 ps.close();
             } catch (SQLException e1) {
 
                 e1.printStackTrace();
             }
-        if (con != null)
+        }
+        if (con != null) {
             try {
                 con.close();
             } catch (SQLException e2) {
 
                 e2.printStackTrace();
             }
+        }
 
     }
 
@@ -81,8 +84,9 @@ public class UserDAO {
     }
 
     public User getUserByUsername(String name) {
-        if (name == null)
+        if (name == null) {
             return null;
+        }
         User user = null;
         try {
             this.getConnection();
@@ -114,8 +118,9 @@ public class UserDAO {
     }
 
     public int modifyUserByUserName(String username, String password, String phone, String address) {
-        if (username == null)
+        if (username == null) {
             return 0;
+        }
         User user = getUserByUsername(username);
         int ans = 0;
         if (user != null) {
@@ -159,12 +164,14 @@ public class UserDAO {
 
     public int insertNewUser(String username, String password, String phone, String address) {
         int ans = 0;
-        if (username == null)
+        if (username == null) {
             return 0;
+        }
         User user = getUserByUsername(username);
 
-        if (user != null)
+        if (user != null) {
             return 0;
+        }
         try {
             this.getConnection();
             String sql = "insert into users (username,password,phone,address)" + "values(?,?,?,?)";
@@ -185,8 +192,9 @@ public class UserDAO {
     }
 
     public void deleteUserByUserName(String name) {
-        if (name == null)
+        if (name == null) {
             return;
+        }
         try {
             this.getConnection();
             String sql = "delete from users where users.username=?";

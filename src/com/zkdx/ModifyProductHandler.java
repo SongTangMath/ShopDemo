@@ -30,6 +30,7 @@ public class ModifyProductHandler extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
         // TODO Auto-generated method stub
@@ -52,17 +53,19 @@ public class ModifyProductHandler extends HttpServlet {
             + request.getContextPath() + "/";
 
         ProductDAO dao = new ProductDAO();
-        for (FileItem item : items)
+        for (FileItem item : items) {
             if (item.isFormField()) {
                 String itemFieldName = item.getFieldName();
                 String value = null;
                 value = item.getString("utf-8");
-                if ("productname".equals(itemFieldName))
+                if ("productname".equals(itemFieldName)) {
                     productname = value;
+                }
 
             }
+        }
 
-        for (FileItem item : items)
+        for (FileItem item : items) {
             if (item.isFormField()) {
                 String itemFieldName = item.getFieldName();
                 String value = null;
@@ -77,12 +80,14 @@ public class ModifyProductHandler extends HttpServlet {
                     dao.modifyProductPlanByProductName(productname, item.getString("utf-8"));
                 }
             }
-        for (FileItem item : items)
+        }
+        for (FileItem item : items) {
             if (!item.isFormField()) {
                 String fileName = item.getName();
                 System.out.println("fileSize:" + item.getSize());
-                if (item.getSize() == 0)
+                if (item.getSize() == 0) {
                     continue;
+                }
                 String filePathPart1 = getServletContext().getRealPath("/UploadedPictures");
                 long time = System.currentTimeMillis();
                 String filePathPart2 = time + fileName;
@@ -106,12 +111,14 @@ public class ModifyProductHandler extends HttpServlet {
                     e.printStackTrace();
                 }
             }
+        }
         response.sendRedirect(request.getContextPath() + "/ProductsPlanner.jsp");
     }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
         // TODO Auto-generated method stub

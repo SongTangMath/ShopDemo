@@ -26,6 +26,7 @@ public class ModifyProductNumber extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
         // TODO Auto-generated method stub
@@ -46,14 +47,16 @@ public class ModifyProductNumber extends HttpServlet {
             mapSub.put(temp.getId(), request.getParameter("subProductID" + temp.getId()));
         }
         for (int key : mapAdd.keySet()) {
-            if (mapAdd.get(key) == null || "".equals(mapAdd.get(key)))
+            if (mapAdd.get(key) == null || "".equals(mapAdd.get(key))) {
                 continue;
+            }
             isPurchaser = true;
             System.out.println("ProductID: " + key + " add" + mapAdd.get(key));
             try {
                 int num = Integer.parseInt(mapAdd.get(key));
-                if (num < 0)
+                if (num < 0) {
                     num = 0;
+                }
                 dao.modifyProductIntentoryQuantityByProductId(key, num);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -61,26 +64,30 @@ public class ModifyProductNumber extends HttpServlet {
         }
 
         for (int key : mapSub.keySet()) {
-            if (mapSub.get(key) == null || "".equals(mapSub.get(key)))
+            if (mapSub.get(key) == null || "".equals(mapSub.get(key))) {
                 continue;
+            }
             try {
                 int num = Integer.parseInt(mapSub.get(key));
-                if (num < 0)
+                if (num < 0) {
                     num = 0;
+                }
                 dao.modifyProductIntentoryQuantityByProductId(key, -num);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        if (isPurchaser)
+        if (isPurchaser) {
             response.sendRedirect(request.getContextPath() + "/Purchaser.jsp");
-        else
+        } else {
             response.sendRedirect(request.getContextPath() + "/Seller.jsp");
+        }
     }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
         // TODO Auto-generated method stub

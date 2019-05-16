@@ -127,15 +127,13 @@ public class QuerySellingStatus extends HttpServlet {
         row.createCell(0).setCellValue(totalCost);
         row.createCell(1).setCellValue(totalProfit);
 
-        String fileName = "" + beginDateString + "到" + beginDateString + "销售数据.xlsx";
+        String fileName = "" + beginDateString + "到" + endDateString + "销售数据.xlsx";
         response.setHeader("Content-disposition",
-            "attachment;filename=" + new String(fileName.getBytes("gb2312"), "ISO8859-1")); // 设置文件头编码格式
+            "attachment;filename=" + new String(fileName.getBytes("gb2312"), "ISO8859-1"));
+        response.setContentType("APPLICATION/OCTET-STREAM;charset=UTF-8");
+        response.setHeader("Cache-Control", "no-cache");
 
-        response.setContentType("APPLICATION/OCTET-STREAM;charset=UTF-8");// 设置类型
-
-        response.setHeader("Cache-Control", "no-cache");// 设置头
-
-        response.setDateHeader("Expires", 0);// 设置日期头
+        response.setDateHeader("Expires", 0);
         workBook.write(response.getOutputStream());
         workBook.close();
         response.getOutputStream().flush();

@@ -26,6 +26,7 @@ public class LoginHandler extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
         // TODO Auto-generated method stub
@@ -35,9 +36,9 @@ public class LoginHandler extends HttpServlet {
         System.out.print(username);
         UserDAO obj = new UserDAO();
         User user = obj.getUserByUsername(username);
-        if (user == null || !user.getPassword().equals(password))
+        if (user == null || !user.getPassword().equals(password)) {
             response.sendRedirect("/ShopDemo/loginFailed.jsp");
-        else {
+        } else {
             request.getSession().setAttribute("user", user);
             List<Product> list = new ProductDAO().getAllProducts();
             request.setAttribute("productList", list);
@@ -49,6 +50,7 @@ public class LoginHandler extends HttpServlet {
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
         // TODO Auto-generated method stub

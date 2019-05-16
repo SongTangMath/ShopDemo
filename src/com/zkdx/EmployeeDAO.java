@@ -32,27 +32,30 @@ public class EmployeeDAO {
     }
 
     public void closeAll() {
-        if (rs != null)
+        if (rs != null) {
             try {
                 rs.close();
             } catch (SQLException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-        if (ps != null)
+        }
+        if (ps != null) {
             try {
                 ps.close();
             } catch (SQLException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
-        if (con != null)
+        }
+        if (con != null) {
             try {
                 con.close();
             } catch (SQLException e2) {
                 // TODO Auto-generated catch block
                 e2.printStackTrace();
             }
+        }
 
     }
 

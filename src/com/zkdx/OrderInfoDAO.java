@@ -33,27 +33,30 @@ public class OrderInfoDAO {
     }
 
     public void closeAll() {
-        if (rs != null)
+        if (rs != null) {
             try {
                 rs.close();
             } catch (SQLException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-        if (ps != null)
+        }
+        if (ps != null) {
             try {
                 ps.close();
             } catch (SQLException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
-        if (con != null)
+        }
+        if (con != null) {
             try {
                 con.close();
             } catch (SQLException e2) {
                 // TODO Auto-generated catch block
                 e2.printStackTrace();
             }
+        }
 
     }
 
@@ -208,7 +211,8 @@ public class OrderInfoDAO {
         OrderInfoDAO dao = new OrderInfoDAO();
         List<OrderInfo> list = dao.listOrdersByTime(beginDate, endDate);
         System.out.println(list.size());
-        for (OrderInfo info : list)
+        for (OrderInfo info : list) {
             System.out.println(info);
+        }
     }
 }

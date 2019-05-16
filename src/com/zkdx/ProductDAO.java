@@ -32,27 +32,30 @@ public class ProductDAO {
     }
 
     public void closeAll() {
-        if (rs != null)
+        if (rs != null) {
             try {
                 rs.close();
             } catch (SQLException e) {
 
                 e.printStackTrace();
             }
-        if (ps != null)
+        }
+        if (ps != null) {
             try {
                 ps.close();
             } catch (SQLException e1) {
 
                 e1.printStackTrace();
             }
-        if (con != null)
+        }
+        if (con != null) {
             try {
                 con.close();
             } catch (SQLException e2) {
 
                 e2.printStackTrace();
             }
+        }
 
     }
 
@@ -92,8 +95,9 @@ public class ProductDAO {
     }
 
     public Product getProductByProductName(String name) {
-        if (name == null)
+        if (name == null) {
             return null;
+        }
         Product product = null;
         try {
             getConnection();
@@ -125,8 +129,9 @@ public class ProductDAO {
 
     public int modifyProductByProductName(String productname, String pictureLink, int inventoryQuantity, int price,
         String productplan) {
-        if (productname == null)
+        if (productname == null) {
             return 0;
+        }
         Product product = getProductByProductName(productname);
         int ans = 0;
         if (product != null) {
@@ -158,8 +163,9 @@ public class ProductDAO {
 
     public int modifyProductByProductName(String productname, String pictureLink, int inventoryQuantity, int price,
         String productplan, int buyingPrice, String productCategory) {
-        if (productname == null)
+        if (productname == null) {
             return 0;
+        }
         Product product = getProductByProductName(productname);
         int ans = 0;
         if (product != null) {
@@ -191,8 +197,9 @@ public class ProductDAO {
     }
 
     public int modifyProductPictureLinkByProductName(String productname, String pictureLink) {
-        if (productname == null)
+        if (productname == null) {
             return 0;
+        }
         Product product = getProductByProductName(productname);
 
         int ans = 0;
@@ -218,8 +225,9 @@ public class ProductDAO {
     }
 
     public int modifyProductPlanByProductName(String productname, String productPlan) {
-        if (productname == null)
+        if (productname == null) {
             return 0;
+        }
         Product product = getProductByProductName(productname);
         int ans = 0;
         if (product != null) {
@@ -253,8 +261,9 @@ public class ProductDAO {
                 ps = con.prepareStatement(sql);
                 ps.setInt(2, id);
                 int newIntentoryQuantity = number + product.getInventoryQuantity();
-                if (newIntentoryQuantity < 0)
+                if (newIntentoryQuantity < 0) {
                     newIntentoryQuantity = 0;
+                }
                 ps.setInt(1, newIntentoryQuantity);
                 ans = ps.executeUpdate();
             } catch (Exception e) {
@@ -286,13 +295,15 @@ public class ProductDAO {
 
     public int insertNewProduct(String productname, String pictureLink, int inventoryQuantity, int price,
         String productplan) {
-        if (productname == null)
+        if (productname == null) {
             return 0;
+        }
         int ans = 0;
         Product product = getProductByProductName(productname);
 
-        if (product != null)
+        if (product != null) {
             return 0;
+        }
         try {
             this.getConnection();
             String sql = "insert into productinfo (productname,pictureLink,inventoryQuantity,price,productplan)"
@@ -317,13 +328,15 @@ public class ProductDAO {
 
     public int insertNewProduct(String productname, String pictureLink, int inventoryQuantity, int price,
         String productplan, int buyingPrice, String productCategory) {
-        if (productname == null)
+        if (productname == null) {
             return 0;
+        }
         int ans = 0;
         Product product = getProductByProductName(productname);
 
-        if (product != null)
+        if (product != null) {
             return 0;
+        }
         try {
             this.getConnection();
             String sql = "insert into productinfo (productname,pictureLink,inventoryQuantity,price,"
@@ -349,8 +362,9 @@ public class ProductDAO {
     }
 
     public void deleteProductByProductName(String name) {
-        if (name == null)
+        if (name == null) {
             return;
+        }
         try {
             this.getConnection();
             String sql = "delete from product where productinfo.productname=?";

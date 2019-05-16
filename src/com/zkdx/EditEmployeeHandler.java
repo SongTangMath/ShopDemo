@@ -27,6 +27,7 @@ public class EditEmployeeHandler extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
         // TODO Auto-generated method stub
@@ -83,8 +84,9 @@ public class EditEmployeeHandler extends HttpServlet {
                 if (employee == null) {
                     ans = 0;
                     return;
-                } else
+                } else {
                     request.getSession().setAttribute("employee", employee);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -147,6 +149,7 @@ public class EditEmployeeHandler extends HttpServlet {
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
         // TODO Auto-generated method stub
