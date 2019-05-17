@@ -73,6 +73,20 @@
 
 
 	</form>
+	
+	</form>
+
+	<div style="text-align: center">通过excel新增商品</div>
+	<form method="POST"
+		action="<%out.write(basePath + "addProductsFromExcel");%>">
+		<div style="text-align: center">
+			请选择excel文件<input type="file" name="excel" />
+			 <input type="submit"
+				value="submit">
+		</div>
+
+
+	</form>
 
 	<a href="<%=basePath + "Quit"%>">退出登录并返回首页</a>
 </body>

@@ -452,11 +452,13 @@ public class ProductDAO {
         obj.clearProducts();
         obj.insertNewProduct("红米Redmi Note7",
             "//img13.360buyimg.com/n1/s450x450_jfs/t1/9085/2/12381/146200/5c371c5bE08328383/4f4ba51aed682207.jpg", 10,
-            1200, "", 1000, "手机");
+            1200, "", 1000, "手机 手机通讯");
 
         obj.insertNewProduct("华为MagicBook 2019",
             "https://img11.360buyimg.com/cms/jfs/t1/32635/15/9955/193607/5cac060cEa590420b/fe8ad1d5ea5f9f98.png", 12,
-            4299, "", 4000, "笔记本电脑");
+            4299, "", 4000, "电脑 电脑整机 笔记本");
+        obj.insertNewProduct("海信(Hisense)HZ55E5A 55英寸 超高清4K ", "https://img11.360buyimg.com/n7/jfs/t29518/5/50591075/273007/2bc96965/5be66874N2b394fba.jpg", 10, 3399, "", 3000, "家用电器 电视  超薄电视");
+        obj.insertNewProduct("小(MI)小米全面屏电视E55A 55英寸", "https://img14.360buyimg.com/n7/jfs/t27709/201/1586417750/361172/4e970d11/5be66bf1N8f00d10e.jpg", 15, 1399, "", 1100, "家用电器 电视  智能电视");
         List<Product> list = obj.getAllProducts();
         for (Product temp : list) {
             System.out.println(temp);

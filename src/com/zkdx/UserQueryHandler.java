@@ -1,7 +1,7 @@
 package com.zkdx;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,13 +33,29 @@ public class UserQueryHandler extends HttpServlet {
         // TODO Auto-generated method stub
         request.setCharacterEncoding("utf-8");
         String queryString = request.getParameter("productcategory");
+        String level0= request.getParameter("level0");
+        String level1= request.getParameter("level1");
+        String level2= request.getParameter("level2");
+        System.out.println(level0);
+        System.out.println(level1);
+        System.out.println(level2);
+        List<Product> list = new ArrayList<Product> (); 
+        ProductDAO dao=new ProductDAO();
         if (queryString != null && !"".equals(queryString)) {
-            List<Product> list = new ProductDAO().listProductsByProductCategory(queryString);
-            request.setAttribute("productList", list);
-        } else {
-            List<Product> list = new ProductDAO().getAllProducts();
-            request.setAttribute("productList", list);
+           list =dao.listProductsByProductCategory(queryString);
+           
+        } else if(level2!=null || level1!=null || level0 != null){
+           
+         list = dao.listProductsByProductCategory(level2);
+         if(list.isEmpty()) {
+             list = dao.listProductsByProductCategory(level1);
+             if(list.isEmpty()) {
+                 list = dao.listProductsByProductCategory(level0);
+             }
+         }
+            
         }
+        request.setAttribute("productList", list);
         request.getRequestDispatcher("Products.jsp").forward(request, response);
 
     }

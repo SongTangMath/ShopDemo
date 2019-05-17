@@ -49,3 +49,11 @@ insert into orderinfo(username,orderid,orderdatetime,productname,productnumber,p
 'Jerry',2, '2013-01-02 12:00:00','红米Redmi Note7',3,1200,1000,'手机');
 
 select *from orderinfo where orderdatetime between '2008-01-01' and '2012-02-02';
+
+create table category(category_id int(10) primary key auto_increment,
+category_name varchar(60),
+parent_id int(10),
+is_end tinyint(4) default 0,
+category_status tinyint(4) default 1,
+category_level int(10),
+unique(category_name) )charset utf8mb4;
