@@ -76,8 +76,10 @@
 	
 	</form>
 
-	<div style="text-align: center">通过excel新增商品</div>
-	<form method="POST"
+	<div style="text-align: center">通过excel新增商品,格式如下:第一行为各字段名称,后面的行为数据<br>
+	序号 商品名称 商品售价 商品进价 商品分类
+	</div>
+	<form method="POST" enctype="multipart/form-data"
 		action="<%out.write(basePath + "addProductsFromExcel");%>">
 		<div style="text-align: center">
 			请选择excel文件<input type="file" name="excel" />

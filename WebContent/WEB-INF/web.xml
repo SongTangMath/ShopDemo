@@ -118,7 +118,7 @@
   </servlet-mapping>
     <servlet>
     <servlet-name>addProductsFromExcel</servlet-name>
-    <servlet-class>com.zkdx.addProductsFromExcel</servlet-class>
+    <servlet-class>com.zkdx.AddProductsFromExcel</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>addProductsFromExcel</servlet-name>
