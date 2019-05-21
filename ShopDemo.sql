@@ -57,3 +57,10 @@ is_end tinyint(4) default 0,
 category_status tinyint(4) default 1,
 category_level int(10),
 unique(category_name) )charset utf8mb4;
+
+create table extendedattribute(
+attribute_id int(10) primary key auto_increment,
+	product_id int(10) ,
+product_name varchar(60),
+attribute_name varchar(60),
+attribute_value varchar(60))charset utf8mb4;

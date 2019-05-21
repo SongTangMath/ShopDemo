@@ -47,7 +47,9 @@
 			<td><a
 				href="<%out.write(basePath + "ModifyProduct.jsp?ProductID=" + temp.getId());%>">
 					修改图片文案</a></td>
-
+			<td><a
+				href="<%out.write(basePath + "ModifyProductExtendedAttribute.jsp?ProductID=" + temp.getId());%>">
+					编辑扩展属性</a></td>
 		</tr>
 		<%
 		    }
