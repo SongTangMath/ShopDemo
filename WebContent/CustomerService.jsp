@@ -22,7 +22,7 @@
 	%>
 	<div style="text-align: center">
 		欢迎你,<%=employee%></div>
-<body>
+
 	<form method="POST"
 		action="<%out.write(basePath + "CustomerServiceQueryUser");%>">
 
@@ -31,8 +31,6 @@
 				value="搜索指定用户的订单">
 		</div>
 	</form>
-
-
 	<%
 	    TreeMap<java.sql.Date, LinkedList<OrderInfo>> map =
 	        (TreeMap<java.sql.Date, LinkedList<OrderInfo>>)request.getAttribute("orderInfoMap");
@@ -57,20 +55,12 @@
 			<th>订单时间</th>
 			<th>商品及数量</th>
 			<th>总价</th>
-
-
 		</tr>
 		<%
 		    for (java.sql.Date date : map.keySet()) {
 		        LinkedList<OrderInfo> listOrderInfo = map.get(date);
 		        int sum = 0, n = listOrderInfo.size();
 		%>
-
-
-
-
-
-
 		<tr>
 			<td><%=ddtf.format(date)%></td>
 			<td>
@@ -88,6 +78,10 @@
 		<%
 		    }
 		%>
+		</table>		
+		
+		
+		<a href="<%=basePath + "ShowAllOrderInfo.jsp"%>">分页查询所有订单</a>
 		<a href="<%=basePath + "Quit"%>">退出登录并返回首页</a>
 </body>
 </html>

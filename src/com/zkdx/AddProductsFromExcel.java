@@ -37,6 +37,7 @@ public class AddProductsFromExcel extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
 
@@ -70,16 +71,11 @@ public class AddProductsFromExcel extends HttpServlet {
                 if (!file.exists()) {
                     file.mkdirs();
                 }
-
                 file = new File(file, filePathPart2);
-
                 System.out.println(file.getAbsolutePath());
                 try {
-
                     item.write(file);
-
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block
+                } catch (Exception e) {                    
                     e.printStackTrace();
                 }
             }
@@ -99,7 +95,7 @@ public class AddProductsFromExcel extends HttpServlet {
         Sheet sheet = workBook.getSheetAt(0);
         ProductDAO dao = new ProductDAO();
         DataFormatter formatter = new DataFormatter();
-        // 第一行是列名，所以从第二行开始遍历
+        
         int firstRowNum = sheet.getFirstRowNum();
         int lastRowNum = sheet.getLastRowNum();
         System.out.println("firstRowNum: " + firstRowNum + "lastRowNum: " + lastRowNum);
@@ -148,6 +144,8 @@ public class AddProductsFromExcel extends HttpServlet {
                             if (!"商品分类".equals(text)) {
                                 checkFirstRow = false;
                             }
+                            break;
+                        default:
                             break;
                     }
 
@@ -207,6 +205,7 @@ public class AddProductsFromExcel extends HttpServlet {
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
         // TODO Auto-generated method stub

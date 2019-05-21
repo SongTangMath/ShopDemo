@@ -116,13 +116,22 @@
     <servlet-name>JSONCategory</servlet-name>
     <url-pattern>/JSONCategory</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>addProductsFromExcel</servlet-name>
     <servlet-class>com.zkdx.AddProductsFromExcel</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>addProductsFromExcel</servlet-name>
     <url-pattern>/addProductsFromExcel</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>ListOrderByPage</servlet-name>
+    <servlet-class>com.zkdx.ListOrderByPage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListOrderByPage</servlet-name>
+    <url-pattern>/ListOrderByPage</url-pattern>
   </servlet-mapping>
   
 </web-app>
