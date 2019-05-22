@@ -9,6 +9,15 @@ public class OrderInfo {
     private int productNumber, price;
     private int buyingPrice;
     private String productCategory;
+    private String extendedAttributeString;
+
+    public String getExtendedAttributeString() {
+        return extendedAttributeString;
+    }
+
+    public void setExtendedAttributeString(String extendedAttributeString) {
+        this.extendedAttributeString = extendedAttributeString;
+    }
 
     public int getBuyingPrice() {
         return buyingPrice;
@@ -84,8 +93,10 @@ public class OrderInfo {
         this.price = price;
     }
 
+   
+
     public OrderInfo(String username, String orderid, Date date, String productname, int productNumber, int price,
-        int buyingPrice, String productCategory) {
+        int buyingPrice, String productCategory, String extendedAttributeString) {
         super();
         this.username = username;
         this.orderid = orderid;
@@ -95,13 +106,14 @@ public class OrderInfo {
         this.price = price;
         this.buyingPrice = buyingPrice;
         this.productCategory = productCategory;
+        this.extendedAttributeString = extendedAttributeString;
     }
 
     @Override
     public String toString() {
         return "OrderInfo [username=" + username + ", orderid=" + orderid + ", date=" + date + ", productname="
             + productname + ", productNumber=" + productNumber + ", price=" + price + ", buyingPrice=" + buyingPrice
-            + ", productCategory=" + productCategory + "]";
+            + ", productCategory=" + productCategory + ", extendedAttributeString=" + extendedAttributeString + "]";
     }
 
 }

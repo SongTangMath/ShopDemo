@@ -277,6 +277,12 @@ public class CategoryDAO {
         dao.insertNewCategory("空调挂机", "空调", 0, 2);
         dao.insertNewCategory("空调柜机", "空调", 0, 2);
         dao.insertNewCategory("中央空调", "空调", 0, 2);
+        
+        dao.insertNewCategory("男鞋", "", 0, 0);
+        dao.insertNewCategory("流行男鞋", "男鞋", 0, 1);
+        dao.insertNewCategory("新品推荐", "流行男鞋", 0, 2);
+        dao.insertNewCategory("商务休闲鞋", "流行男鞋", 0, 2);
+        dao.insertNewCategory("休闲鞋", "流行男鞋", 0, 2);
 
     }
 

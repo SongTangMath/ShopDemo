@@ -72,8 +72,8 @@ public class ExtendedAttributeDAO {
                 int attributeID = rs.getInt("attribute_id");
                 int productID = rs.getInt("product_id");
                 String productname = rs.getString("product_name");
-                String attributeName = rs.getString("attribute_name");;
-                String attributeValue = rs.getString("attribute_value");;
+                String attributeName = rs.getString("attribute_name");
+                String attributeValue = rs.getString("attribute_value");
                 ExtendedAttribute attr =
                     new ExtendedAttribute(productID, productname, attributeName, attributeValue, attributeID);
                 list.add(attr);
@@ -101,8 +101,8 @@ public class ExtendedAttributeDAO {
                 int attributeID = rs.getInt("attribute_id");
                 int productID = rs.getInt("product_id");
                 String productname = rs.getString("product_name");
-                String attributeName = rs.getString("attribute_name");;
-                String attributeValue = rs.getString("attribute_value");;
+                String attributeName = rs.getString("attribute_name");
+                String attributeValue = rs.getString("attribute_value");
                 ExtendedAttribute attr =
                     new ExtendedAttribute(productID, productname, attributeName, attributeValue, attributeID);
                 System.out.println(attr);
@@ -121,17 +121,30 @@ public class ExtendedAttributeDAO {
     public int insertNewExtendedAttribute(int product_id, String product_name, String attribute_name,
         String attribute_value) {
         int ans = 0;
+        
         String sql =
             "insert into extendedattribute(product_id,product_name ,attribute_name, attribute_value) values(?,?,?,?)";
-
+        String sql1="select *from extendedattribute where product_name=? and attribute_name=?";
         try {
             getConnection();
+            
+            ps=con.prepareStatement(sql1);
+            ps.setString(1, product_name);
+            ps.setString(2, attribute_name);
+            rs=ps.executeQuery();
+            while(rs.next()) {
+                ans=1;
+                break;
+            }
+            if(ans == 0) {
+            
             ps = con.prepareStatement(sql);
             ps.setInt(1, product_id);
             ps.setString(2, product_name);
             ps.setString(3, attribute_name);
             ps.setString(4, attribute_value);
-            ans = ps.executeUpdate();
+            ans = ps.executeUpdate();}
+            
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block

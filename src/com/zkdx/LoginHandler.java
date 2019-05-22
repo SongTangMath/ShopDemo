@@ -41,7 +41,7 @@ public class LoginHandler extends HttpServlet {
         } else {
             request.getSession().setAttribute("user", user);
             List<Product> list = new ProductDAO().getAllProducts();
-            request.setAttribute("productList", list);
+            request.getSession().setAttribute("productList", list);
             request.getRequestDispatcher("Products.jsp").forward(request, response);
         }
 

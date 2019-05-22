@@ -62,8 +62,13 @@
 			
 			<td>
 				<%				   
-				            out.write("商品名称" + info.getProductname() + "商品数量"
-				                + info.getProductNumber());				        
+				out.write("商品名称 " + info.getProductname());
+				out.write("<br>商品数量:" + info.getProductNumber());
+
+				out.write("<br>额外属性信息:" + info.getExtendedAttributeString());
+
+				out.write("<br>");
+				out.write("<br>");			        
 				%>
 			</td>
 			<td><%=info.getPrice()*info.getProductNumber()%></td>

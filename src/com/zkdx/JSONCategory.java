@@ -28,19 +28,10 @@ public class JSONCategory extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    response.setContentType("text/html;charset=utf-8");
-        
-        List<Category> listLevel0Categories = new CategoryDAO().listLevel0Categories();
-        /*
-        List<String>list=new ArrayList<String>();        
-        for(Category category:listLevel0Categories) {
-            list.add(category.getCategoryName());
-        }
-        */
+	    response.setContentType("text/html;charset=utf-8");        
+        List<Category> listLevel0Categories = new CategoryDAO().listLevel0Categories();      
         String str = JSONArray.fromObject(listLevel0Categories).toString();
         response.getWriter().write(str);
-
-
 	}
 
 	/**
@@ -56,6 +47,7 @@ public class JSONCategory extends HttpServlet {
 		List<Category> listLevel1Categories = null;
 		List<Category> listLevel2Categories = null;
 		String str="";
+		
 		if(level0!=null && !"".equals(level0)) {
 		    listLevel1Categories = new CategoryDAO().listCategoriesByParentName(level0);
 		    str = JSONArray.fromObject(listLevel1Categories).toString();

@@ -66,9 +66,13 @@
 			<td>
 				<%
 				    for (int i = 0; i < n; i++) {
-				            out.write("商品名称" + listOrderInfo.get(i).getProductname() + "商品数量"
-				                + listOrderInfo.get(i).getProductNumber());
-				            out.write("<br>");
+				    	out.write("商品名称 " + listOrderInfo.get(i).getProductname());
+						out.write("<br>商品数量:" + listOrderInfo.get(i).getProductNumber());
+
+						out.write("<br>额外属性信息:" + listOrderInfo.get(i).getExtendedAttributeString());
+
+						out.write("<br>");
+						out.write("<br>");
 				            sum += listOrderInfo.get(i).getProductNumber() * listOrderInfo.get(i).getPrice();
 				        }
 				%>

@@ -55,7 +55,7 @@ public class UserQueryHandler extends HttpServlet {
          }
             
         }
-        request.setAttribute("productList", list);
+        request.getSession().setAttribute("productList", list);
         request.getRequestDispatcher("Products.jsp").forward(request, response);
 
     }

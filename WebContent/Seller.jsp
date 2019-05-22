@@ -59,6 +59,6 @@
 		<input type="submit" value="submit">
 	</form>
 
-	<a href="<%=basePath + "Quit"%>">退出登录并返回首页</a>
+	<a href="<%=basePath + "Quit"%>" target="_self">退出登录并返回首页</a>
 </body>
 </html>

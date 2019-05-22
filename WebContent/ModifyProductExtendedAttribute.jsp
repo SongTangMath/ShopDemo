@@ -63,7 +63,7 @@
 	<br/>
 	<form method="post" action="<%=addPath%>">
 		属性名<input type="text" name="attributename" /> <br> 
-		属性值<input
+		属性可选值,不同的值用空格分隔<input
 			type="text" name="attributevalue" />
 			<input type="hidden" name="ProductID" value="<%=ProductID %>" />
 			<input type="submit" value="submit" />

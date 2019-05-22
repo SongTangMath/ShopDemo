@@ -92,6 +92,9 @@ public class AddProductsFromExcel extends HttpServlet {
         } else if (path.endsWith("xls")) {
             workBook = new HSSFWorkbook(new FileInputStream(file));
         }
+        if(workBook==null) {
+            return;
+        }
         Sheet sheet = workBook.getSheetAt(0);
         ProductDAO dao = new ProductDAO();
         DataFormatter formatter = new DataFormatter();

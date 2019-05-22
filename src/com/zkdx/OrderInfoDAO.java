@@ -80,8 +80,9 @@ public class OrderInfoDAO {
                 int price = rs.getInt("price");
                 int buyingPrice = rs.getInt("buyingprice");
                 String productCategory = rs.getString("productcategory");
+                String extendedAttributeString = rs.getString("extended_attribute_string" );
                 OrderInfo info = new OrderInfo(username, orderid, orderdatetime, productname, productNumber, price,
-                    buyingPrice, productCategory);
+                    buyingPrice, productCategory,extendedAttributeString);
                 list.add(info);
             }
 
@@ -114,8 +115,9 @@ public class OrderInfoDAO {
                 int price = rs.getInt("price");
                 int buyingPrice = rs.getInt("buyingprice");
                 String productCategory = rs.getString("productcategory");
+                String extendedAttributeString = rs.getString("extended_attribute_string" );
                 OrderInfo info = new OrderInfo(username, orderid, orderdatetime, productname, productNumber, price,
-                    buyingPrice, productCategory);
+                    buyingPrice, productCategory,extendedAttributeString);
                 list.add(info);
             }
 
@@ -149,8 +151,9 @@ public class OrderInfoDAO {
                 int price = rs.getInt("price");
                 int buyingPrice = rs.getInt("buyingprice");
                 String productCategory = rs.getString("productcategory");
+                String extendedAttributeString = rs.getString("extended_attribute_string" );
                 OrderInfo info = new OrderInfo(username, orderid, orderdatetime, productname, productNumber, price,
-                    buyingPrice, productCategory);
+                    buyingPrice, productCategory,extendedAttributeString);
                 list.add(info);
             }
 
@@ -182,8 +185,9 @@ public class OrderInfoDAO {
                 int price = rs.getInt("price");
                 int buyingPrice = rs.getInt("buyingprice");
                 String productCategory = rs.getString("productcategory");
+                String extendedAttributeString = rs.getString("extended_attribute_string" );
                 OrderInfo info = new OrderInfo(username, orderid, orderdatetime, productname, productNumber, price,
-                    buyingPrice, productCategory);
+                    buyingPrice, productCategory,extendedAttributeString);
                 if (!map.containsKey(info.getDate())) {
                     LinkedList<OrderInfo> tempList = new LinkedList<OrderInfo>();
                     tempList.add(info);
@@ -208,8 +212,8 @@ public class OrderInfoDAO {
         int ans = 0;
 
         String sql =
-            "insert into orderinfo(username, orderid, orderdatetime, productname, productnumber, price,buyingprice,productcategory)"
-                + " values(?,?,?,?,?,?,?,?)";
+            "insert into orderinfo(username, orderid, orderdatetime, productname, productnumber, price,buyingprice,productcategory,extended_attribute_string)"
+                + " values(?,?,?,?,?,?,?,?,?)";
         try {
             getConnection();
             ps = con.prepareStatement(sql);
@@ -221,6 +225,7 @@ public class OrderInfoDAO {
             ps.setInt(6, info.getPrice());
             ps.setInt(7, info.getBuyingPrice());
             ps.setString(8, info.getProductCategory());
+            ps.setString(9, info.getExtendedAttributeString());
             ans = ps.executeUpdate();
 
         } catch (SQLException e) {

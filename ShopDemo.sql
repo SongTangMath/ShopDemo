@@ -6,6 +6,8 @@ productname varchar(60) not null,
 price int(10),inventoryQuantity int(10),
 pictureLink varchar(120),
 productplan text,
+buyingprice int(10) default 0,
+productcategory varchar(60),
 unique(productname)
 )charset utf8mb4;
 create table users
@@ -33,14 +35,15 @@ orderid varchar(30) not null,
 orderdatetime datetime not null,
 productname varchar(60)not null,
 productnumber int(10)not null,
-price int(10) not null
+price int(10) not null,
+extended_attribute_string  varchar(60) default '',
+buyingprice int(10) default 0,
+productcategory varchar(60)
 )	charset utf8mb4;
 
-alter table productinfo add(buyingprice int(10) default 0,
-productcategory varchar(60));
 
-alter table orderinfo add(buyingprice int(10) default 0,
-productcategory varchar(60));
+
+
 
 insert into orderinfo(username,orderid,orderdatetime,productname,productnumber,price,buyingprice,productcategory)values(
 'Tom',1, '2009-01-02 12:00:00','华为MagicBook 2019',2,4299,4000,'笔记本电脑');
@@ -63,4 +66,6 @@ attribute_id int(10) primary key auto_increment,
 	product_id int(10) ,
 product_name varchar(60),
 attribute_name varchar(60),
-attribute_value varchar(60))charset utf8mb4;
+attribute_value varchar(60),
+unique(product_name,attribute_name))charset utf8mb4;
+

@@ -25,7 +25,8 @@ public class ListOrderByPage extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
 		String orderListIndexString = request.getParameter("orderlistindex");
@@ -42,16 +43,15 @@ public class ListOrderByPage extends HttpServlet {
 		OrderInfoDAO dao=new OrderInfoDAO();
 		System.out.println("orderListIndex: "+orderListIndex);
 		List<OrderInfo> list=dao.listOrdersByIndice(orderListIndex - 1, 10);
-		request.setAttribute("orderInfoList", list);
-		 for(OrderInfo info:list)
-	            System.out.println(info);
+		request.setAttribute("orderInfoList", list);		
 		request.getRequestDispatcher("ShowAllOrderInfo.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

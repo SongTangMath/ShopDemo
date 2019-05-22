@@ -33,8 +33,9 @@ public class UserBuyHandler extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
         // TODO Auto-generated method stub
+        request.setCharacterEncoding("utf-8");
         User user = (User)request.getSession().getAttribute("user");
-
+        System.out.println(user);
         if (user == null) {
             response.sendRedirect(request.getContextPath() + "/index.html");
             return;
@@ -42,17 +43,12 @@ public class UserBuyHandler extends HttpServlet {
 
         OrderInfoDAO orderInfoDao = new OrderInfoDAO();
         ProductDAO dao = new ProductDAO();
+        ExtendedAttributeDAO dao1 = new ExtendedAttributeDAO();
         List<Product> list = dao.getAllProducts();
         long timeLong = System.currentTimeMillis();
-        System.out.println(timeLong);
         java.sql.Date date = new java.sql.Date(timeLong);
-        DateFormat ddtf = DateFormat.getDateTimeInstance();
-        System.out.println(ddtf.format(date));
-
         for (Product temp : list) {
-
             String key = request.getParameter("buyProductID" + temp.getId());
-
             if (key == null || "".contentEquals(key)) {
                 continue;
             }
@@ -66,17 +62,33 @@ public class UserBuyHandler extends HttpServlet {
                 if (num <= 0) {
                     continue;
                 }
-                OrderInfo info = new OrderInfo(user.getUsername(), user.getUsername() + timeLong, date,
-                    temp.getProductname(), num, temp.getPrice(), temp.getBuyingPrice(), temp.getProductCategory());
+                List<ExtendedAttribute> list1 = dao1.listAttributesByProductID(temp.getId());
+                String extendedAttributeString = "";
+                for (ExtendedAttribute attr : list1) {
+                    String parameterName="ProductID" + temp.getId() + " " + attr.getAttributeName();
+                    String attrValue = request.getParameter(parameterName);
+                    System.out.println(parameterName);
+                    System.out.println(attrValue);
+                    if (attrValue != null) {
+                        
+                        extendedAttributeString += (attr.getAttributeName() + " "+attrValue+" ");
+                    }
+
+                }
+                OrderInfo info =
+                    new OrderInfo(user.getUsername(), user.getUsername() + timeLong, date, temp.getProductname(), num,
+                        temp.getPrice(), temp.getBuyingPrice(), temp.getProductCategory(), extendedAttributeString);
                 System.out.println(info);
                 orderInfoDao.insertNewOrderInfo(info);
                 dao.modifyProductIntentoryQuantityByProductId(temp.getId(), -num);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        response.sendRedirect(request.getContextPath() + "/Products.jsp");
+        // response.sendRedirect(request.getContextPath() + "/Products.jsp");
+        request.getRequestDispatcher("/Products.jsp").forward(request, response);
 
     }
 

@@ -30,12 +30,12 @@
 			<th>库存数量</th>
 			<th>当前文案</th>
 			<th>修改图片文案</th>
-
+			<th>编辑扩展属性</th>
 		</tr>
 		<%
 		    List<Product> list = new ProductDAO().getAllProducts();
 		    for (int i = 0; i < list.size(); i++) {
-		        Product temp = list.get(i);
+		        Product temp = list.get(i);		        
 		%>
 		<tr>
 			<td><%=temp.getProductname()%></td>

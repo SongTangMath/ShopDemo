@@ -25,6 +25,7 @@ public class ModifyProductExtendedAttributeHandler extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
@@ -41,6 +42,7 @@ public class ModifyProductExtendedAttributeHandler extends HttpServlet {
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");

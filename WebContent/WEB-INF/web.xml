@@ -132,8 +132,7 @@
     <servlet-name>ListOrderByPage</servlet-name>
     <url-pattern>/ListOrderByPage</url-pattern>
   </servlet-mapping>
-  
-    <servlet>
+  <servlet>
     <servlet-name>ModifyProductExtendedAttributeHandler</servlet-name>
     <servlet-class>com.zkdx.ModifyProductExtendedAttributeHandler</servlet-class>
   </servlet>
@@ -142,5 +141,13 @@
     <url-pattern>/ModifyProductExtendedAttributeHandler</url-pattern>
   </servlet-mapping>
   
+    <servlet>
+    <servlet-name>JSONExtendedAttributeMap</servlet-name>
+    <servlet-class>com.zkdx.JSONExtendedAttributeMap</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>JSONExtendedAttributeMap</servlet-name>
+    <url-pattern>/JSONExtendedAttributeMap</url-pattern>
+  </servlet-mapping>
   
 </web-app>
