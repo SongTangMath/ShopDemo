@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ page import="java.util.*"%>
+    pageEncoding="UTF-8"%>
+    
+    <%@ page import="java.util.*"%>
 <%@ page import="com.zkdx.*"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>采购员的页面</title>
+<title>Insert title here</title>
 </head>
 <%
     Employee employee = (Employee)request.getSession().getAttribute("employee");
@@ -21,49 +22,8 @@
 <div style="text-align: center">
 	欢迎你,<%=employee%></div>
 <body>
-	<form method="POST"
-		action="<%out.write(basePath + "ModifyProductNumber");%>">
-
-		<table border="1">
-			<tr>
-				<th>商品名称</th>
-				<th>商品图片</th>
-				<th>单价</th>
-				<th>库存数量</th>
-				<th>当前文案</th>
-				<th>进货数量</th>
-
-			</tr>
-			<%
-			    List<Product> list = new ProductDAO().getAllProducts();
-			    for (int i = 0; i < list.size(); i++) {
-			        Product temp = list.get(i);
-			%>
-			<tr>
-				<td><%=temp.getProductname()%></td>
-				<td><img src="<%=temp.getPictureLink()%>"></td>
-				<td><%=temp.getPrice()%></td>
-				<td><div><%=temp.getInventoryQuantity()%></div></td>
-				<td><div><%=temp.getProductplan() == null ? "" : temp.getProductplan()%></div>
-				</td>
-				<td>进货数量<input type="number"
-					name="<%="addProductID" + temp.getId()%>" />
-				</td>
-
-			</tr>
-			<%
-			    }
-			%>
-		</table>
-		<div style="text-align: center">
-			<input type="submit" value="submit">
-		</div>
-
-	</form>
-
-	<div style="text-align: center">下面是新增商品的表单</div>
-	<form method="POST"
-		action="<%out.write(basePath + "addNewProduct");%>">
+<form method="POST"
+		action="<%out.write(basePath + "DeleteCategory");%>">
 		<div style="text-align: center">
 			商品名称<input type="text" name="productname" /> <br/>商品售价<input type="number"
 				name="productprice" />  <br/>商品进价<input type="number" name="buyingprice" />
@@ -77,6 +37,7 @@
 				<option>===请选择第三层分类===</option>
 			</select>
 			 <br/>
+			 要删除的类别名称(所有子类别也会被删除)<input type="text"		name="categorynametodel">
 			 <input type="submit"
 				value="submit">
 		</div>
@@ -84,47 +45,11 @@
 
 	</form>
 	
-		
-
-	<div style="text-align: center">下面是新增商品类别的表单.对顶级类别,上级类别无效</div>
-	<form method="POST"
-		action="<%out.write(basePath + "AddNewCategory");%>">
-		<div style="text-align: center">
-			  <label>
-			<input type="radio" name="isTop" value="0" />非顶级类别</label>
-             <label><input type="radio" name="isTop" value="1" />顶级类别</label>
-				
-				<label>上级类别名称<input type="text" name="parentcategoryname"/></label>
-				<label>类别名称<input type="text" name="categoryname"/></label>
-			 <br/>
-			 <input type="submit"
-				value="submit">
-		</div>
- <br/>
-
-	</form>
-	
-	
-	
 	<br><br><br>
-	<div style="text-align: center">通过excel新增商品,格式如下:第一行为各字段名称,后面的行为数据<br>
-	序号 商品名称 商品售价 商品进价 商品分类
-	</div>
-	<form method="POST" enctype="multipart/form-data"
-		action="<%out.write(basePath + "addProductsFromExcel");%>">
-		<div style="text-align: center">
-			请选择excel文件<input type="file" name="excel" />
-			 <input type="submit"
-				value="submit">
-		</div>
-
-
-	</form>
-	<br><br><br>
-	<a href="<%=basePath + "DeleteCategory.jsp"%>" target="_self">前往删除类别的页面</a>
+	<a href="<%=basePath + "Purchaser.jsp"%>" target="_self">返回添加类别的页面</a>
 	<br><br>
-	<a href="<%=basePath + "Quit"%>" target="_self">退出登录并返回首页</a>
 </body>
+
 <script type="text/javascript">
 	var level0 = document.getElementById("level0");
 	var level1 = document.getElementById("level1");

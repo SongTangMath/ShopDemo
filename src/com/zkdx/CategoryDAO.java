@@ -109,6 +109,30 @@ public class CategoryDAO {
         }
         return category;
     }
+    public int deleteCategoryAndItsSubCategoriesByName(String name) {
+        List<Category> list= listCategoriesByParentName(name);
+        int ans=0;
+        for(Category category:list) {
+            deleteCategoryAndItsSubCategoriesByName(category.getCategoryName());
+        }
+        String sql="delete from category where category_name=?";
+        try {
+            getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, name);
+            ans = ps.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeAll();
+        }
+
+        return ans;
+
+    }
+
+    
 
     public int insertNewCategory(String name, String parentName, int categoryStatus, int categoryLevel) {
         int parentID = -1;
@@ -256,6 +280,7 @@ public class CategoryDAO {
 
     public static void main(String[] args) {
         CategoryDAO dao = new CategoryDAO();
+        /*
         dao.insertNewCategory("家用电器", "", 0, 0);
         dao.insertNewCategory("手机", "", 0, 0);
         dao.insertNewCategory("运营商", "", 0, 0);
@@ -283,7 +308,11 @@ public class CategoryDAO {
         dao.insertNewCategory("新品推荐", "流行男鞋", 0, 2);
         dao.insertNewCategory("商务休闲鞋", "流行男鞋", 0, 2);
         dao.insertNewCategory("休闲鞋", "流行男鞋", 0, 2);
-
+        */
+        dao.insertNewCategory("运动", "", 0, 0);
+        dao.insertNewCategory("骑行运动", "运动", 0, 1);
+        dao.insertNewCategory("山地车", "骑行运动", 0, 2);
+        // dao.deleteCategoryAndItsSubCategoriesByName("运动");
     }
 
 }

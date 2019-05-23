@@ -273,17 +273,13 @@ public class OrderInfoDAO {
         }
 
         OrderInfoDAO dao = new OrderInfoDAO();
-        /*
+        
        for(int i=0;i<100;i++) {
            OrderInfo info=new    OrderInfo( "测试用户"+i, ""+ i,new Date (System.currentTimeMillis()-i*86400L* 1000L),  "product"+i,  i,  100+i,
-                100,  "测试类别") ;                         
+                100,  "测试类别","") ;                         
            dao.insertNewOrderInfo(info);
        }
-       */
-        int totalOrderQuantity=dao.getTotalOrderQuantity();
-        System.out.println(totalOrderQuantity);
-        List<OrderInfo>list=dao.listOrdersByIndice(2, 10);
-        for(OrderInfo info:list)
-            System.out.println(info);
+       
+       
     }
 }

@@ -34,7 +34,7 @@ public class CustomerServiceQueryUser extends HttpServlet {
         String username = request.getParameter("username");
         request.setAttribute("username", username);
         OrderInfoDAO dao = new OrderInfoDAO();
-        int totalOrderQuantity=dao.getTotalOrderQuantity();
+        int totalOrderQuantity = dao.getTotalOrderQuantity();
         request.getSession().setAttribute("totalOrderQuantity", totalOrderQuantity);
         User user = null;
         TreeMap<java.sql.Date, LinkedList<OrderInfo>> map = new TreeMap<java.sql.Date, LinkedList<OrderInfo>>();

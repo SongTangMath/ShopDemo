@@ -6,20 +6,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import net.sf.json.JSONArray;
-import java.util.*;
 
 /**
- * Servlet implementation class JSONExtendedAttributeMap
+ * Servlet implementation class DeleteCategory
  */
-@WebServlet("/JSONExtendedAttributeMap")
-public class JSONExtendedAttributeMap extends HttpServlet {
+@WebServlet("/DeleteCategory")
+public class DeleteCategory extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public JSONExtendedAttributeMap() {
+    public DeleteCategory() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,31 +25,28 @@ public class JSONExtendedAttributeMap extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-        response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
-        String buyProductID = request.getParameter("buyProductID");
+        Employee employee = (Employee)request.getSession().getAttribute("employee");
 
-        HashMap<String, ArrayList<String>> attributeValueMap = new HashMap<String, ArrayList<String>>();
-        try {
-            attributeValueMap = new ExtendedAttributeMap(Integer.parseInt(buyProductID)).getAttributeValueMap();
-        } catch (NumberFormatException e) {
-            System.out.println("NumberFormatException");
+        if (employee == null || !"采购员".equals(employee.getJob())) {
+            response.sendRedirect(request.getContextPath() + "/index.html");
+            return;
         }
-        /*
-        List<String>list=new ArrayList<String>();        
-        for(Category category:listLevel0Categories) {
-            list.add(category.getCategoryName());
-        }
-        */
-        String str = JSONArray.fromObject(attributeValueMap).toString();
-        response.getWriter().write(str);
+        String categoryNameToDel = request.getParameter("categorynametodel");
+        System.out.println(categoryNameToDel);
+        CategoryDAO dao = new CategoryDAO();
+        dao.deleteCategoryAndItsSubCategoriesByName(categoryNameToDel);
+        response.sendRedirect(request.getContextPath() + "/DeleteCategory.jsp");
+
     }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
         // TODO Auto-generated method stub
